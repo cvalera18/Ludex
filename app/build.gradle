@@ -1,0 +1,107 @@
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+
+plugins {
+    id 'com.android.application'
+    id 'org.jetbrains.kotlin.android'
+    id 'dagger.hilt.android.plugin'
+    id 'kotlin-kapt'
+//    id 'com.google.gms.google-services'
+    id 'androidx.navigation.safeargs.kotlin'
+}
+apply plugin: 'kotlin-kapt'
+android.buildFeatures.buildConfig true
+android {
+    namespace 'com.cvalera.gamelista'
+    compileSdk 34
+
+    defaultConfig {
+        applicationId "com.cvalera.gamelista"
+        minSdk 24
+        targetSdk 34
+        versionCode 1
+        versionName "0.1.0"
+        Properties properties = new Properties()
+        properties.load(project.rootProject.file("local.properties").newDataInputStream())
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        // Set API keys in BuildConfig
+        buildConfigField "String", "AUTHORIZATION_TOKEN", "\"${properties.getProperty("AUTHORIZATION_TOKEN")}\""
+        buildConfigField "String", "CLIENT_ID", "\"${properties.getProperty("CLIENT_ID")}\""
+    }
+
+    signingConfigs {
+        release {
+                storeFile file(RELEASE_STORE_FILE)
+                storePassword RELEASE_STORE_PASSWORD
+                keyAlias RELEASE_KEY_ALIAS
+                keyPassword RELEASE_KEY_PASSWORD
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled true
+            shrinkResources true
+            signingConfig signingConfigs.release
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        tasks.withType(KotlinCompile).configureEach {
+            kotlinOptions.jvmTarget = "1.8"
+        }
+    }
+    viewBinding{
+        enabled = true
+    }
+}
+
+dependencies {
+    def room_version = "2.6.1" // Asegúrate de revisar la última versión disponible
+    def hilt_version = "2.51"
+
+    // Room components
+    implementation "androidx.room:room-runtime:$room_version"
+    // Para usar Kotlin coroutines con Room
+    implementation "androidx.room:room-ktx:$room_version"
+    // Para usar LiveData y ViewModel con Room
+    implementation "androidx.lifecycle:lifecycle-livedata-ktx:2.7.0"
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.7.0"
+
+    // Opcional - Test Helpers para Room
+    testImplementation "androidx.room:room-testing:$room_version"
+
+    implementation 'androidx.core:core-ktx:1.12.0'
+    implementation 'androidx.appcompat:appcompat:1.6.1'
+    implementation 'com.google.android.material:material:1.11.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+    implementation "androidx.navigation:navigation-fragment-ktx:2.7.7"
+    implementation 'androidx.navigation:navigation-ui-ktx:2.7.7'
+    implementation 'androidx.fragment:fragment-ktx:1.6.2'
+    implementation 'com.github.bumptech.glide:glide:4.15.1'
+    implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.1.0'
+    implementation 'com.squareup.retrofit2:retrofit:2.9.0'
+    implementation("com.squareup.retrofit2:converter-gson:2.9.0")
+    implementation("com.squareup.okhttp3:okhttp:4.12.0")
+    implementation("com.squareup.okhttp3:logging-interceptor:4.12.0")
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.1'
+    implementation 'io.github.husnjak:igdb-api-jvm:1.1.0'
+    implementation 'com.squareup.retrofit2:converter-scalars:2.9.0'
+    implementation "com.google.dagger:hilt-android:$hilt_version"
+
+//    implementation platform('com.google.firebase:firebase-bom:32.8.1')
+//    implementation 'com.google.firebase:firebase-analytics'
+    kapt "com.google.dagger:hilt-compiler:$hilt_version"
+    kapt "androidx.room:room-compiler:$room_version"
+
+    testImplementation 'org.jetbrains.kotlinx:kotlinx-coroutines-test:1.7.1'
+    testImplementation 'junit:junit:4.13.2'
+    testImplementation "io.mockk:mockk:1.13.10"
+    androidTestImplementation 'androidx.test:core:1.5.0'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.5'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
+
+}

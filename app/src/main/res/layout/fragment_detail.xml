@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".presentation.view.DetailFragment">
+
+    <TextView
+        android:id="@+id/tvGameName"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="The Last of Us: Part 1"
+        android:fontFamily="@font/timmana"
+        android:textAlignment="center"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:maxLines="2"
+        android:ellipsize="end"
+        app:layout_constraintEnd_toStartOf="@+id/ivStarDetail"
+        app:layout_constraintStart_toEndOf="@+id/ivBackArrow"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/ivGameDetail"
+        android:layout_width="160dp"
+        android:layout_height="240dp"
+        android:layout_marginStart="16dp"
+        android:src="@drawable/ic_launcher_background"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvGameName" />
+
+    <TextView
+        android:id="@+id/tvPlatformDetail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:fontFamily="sans-serif-condensed-medium"
+        android:singleLine="true"
+        android:text="@string/platform"
+        android:textSize="12sp"
+        app:layout_constraintStart_toEndOf="@+id/ivGameDetail"
+        app:layout_constraintTop_toBottomOf="@+id/tvGameName" />
+
+    <TextView
+        android:id="@+id/tvStatusDetail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="sans-serif-condensed-medium"
+        android:layout_marginTop="5dp"
+        android:text="@string/state"
+        android:textSize="12sp"
+        app:layout_constraintStart_toStartOf="@+id/tvDev"
+        app:layout_constraintTop_toBottomOf="@+id/tvDevSpec" />
+
+    <ImageView
+        android:id="@+id/ivPlat1"
+        android:layout_width="50dp"
+        android:layout_height="35dp"
+        android:layout_marginStart="10dp"
+        app:layout_constraintStart_toEndOf="@+id/ivGameDetail"
+        app:layout_constraintTop_toBottomOf="@+id/tvPlatformDetail" />
+
+    <ImageView
+        android:id="@+id/ivPlat2"
+        android:layout_width="50dp"
+        android:layout_height="35dp"
+        android:layout_marginStart="5dp"
+        app:layout_constraintStart_toEndOf="@+id/ivPlat1"
+        app:layout_constraintTop_toBottomOf="@+id/tvPlatformDetail" />
+
+    <ImageView
+        android:id="@+id/ivPlat3"
+        android:layout_width="50dp"
+        android:layout_height="35dp"
+        android:layout_marginStart="5dp"
+        app:layout_constraintStart_toEndOf="@+id/ivPlat2"
+        app:layout_constraintTop_toBottomOf="@+id/tvPlatformDetail" />
+
+    <ImageView
+        android:id="@+id/ivPlat4"
+        android:layout_width="50dp"
+        android:layout_height="35dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="2dp"
+        app:layout_constraintStart_toEndOf="@+id/ivGameDetail"
+        app:layout_constraintTop_toBottomOf="@+id/ivPlat1" />
+
+    <ImageView
+        android:id="@+id/ivPlat5"
+        android:layout_width="50dp"
+        android:layout_height="35dp"
+        android:layout_marginTop="2dp"
+        android:layout_marginStart="5dp"
+        app:layout_constraintStart_toEndOf="@+id/ivPlat4"
+        app:layout_constraintTop_toBottomOf="@+id/ivPlat1" />
+
+    <ImageView
+        android:id="@+id/ivPlat6"
+        android:layout_width="50dp"
+        android:layout_height="35dp"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="2dp"
+        app:layout_constraintStart_toEndOf="@+id/ivPlat5"
+        app:layout_constraintTop_toBottomOf="@+id/ivPlat2" />
+
+    <TextView
+        android:id="@+id/tvStatusSpec"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:fontFamily="sans-serif-condensed-medium"
+        android:text="Completado"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/ivGameDetail"
+        app:layout_constraintTop_toBottomOf="@+id/tvStatusDetail" />
+
+
+    <TextView
+        android:id="@+id/tvDev"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="sans-serif-condensed-medium"
+        android:layout_marginTop="5dp"
+        android:text="@string/developer"
+        android:textSize="12sp"
+        app:layout_constraintStart_toStartOf="@+id/tvLaunchDate"
+        app:layout_constraintTop_toBottomOf="@+id/tvLaunchDateSpec" />
+
+    <TextView
+        android:id="@+id/tvDevSpec"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:fontFamily="sans-serif-condensed-medium"
+        android:text="Naughty Dog"
+        android:textSize="20sp"
+        android:maxLines="2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/ivGameDetail"
+        app:layout_constraintTop_toBottomOf="@+id/tvDev" />
+
+    <TextView
+        android:id="@+id/tvLaunchDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="sans-serif-condensed-medium"
+        android:text="@string/rel_date"
+        android:layout_marginTop="5dp"
+        android:textSize="12sp"
+        app:layout_constraintStart_toStartOf="@+id/tvPlatformDetail"
+        app:layout_constraintTop_toBottomOf="@+id/ivPlat5" />
+
+    <TextView
+        android:id="@+id/tvLaunchDateSpec"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:fontFamily="sans-serif-condensed-medium"
+        android:text="02/09/2023"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/ivGameDetail"
+        app:layout_constraintTop_toBottomOf="@+id/tvLaunchDate" />
+
+    <TextView
+        android:id="@+id/tvSinopsis"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="sans-serif-condensed-medium"
+        android:text="@string/synopsis"
+        android:textSize="12sp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ivGameDetail" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvSinopsis">
+
+        <TextView
+            android:id="@+id/tvSinopsisSpec"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:fontFamily="sans-serif-condensed-medium"
+            android:padding="10dp"
+            android:text="@string/tlou1sinopsis"
+            android:textSize="18sp" />
+    </ScrollView>
+
+
+    <ImageView
+        android:id="@+id/ivStarDetail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
+        android:src="@drawable/baseline_star_outline_24"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/ivBackArrow"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:src="@drawable/arrow_back"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

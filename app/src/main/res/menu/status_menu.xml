@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/status_playing"
+        android:title="@string/playing" />
+    <item
+        android:id="@+id/status_pendiente"
+        android:title="@string/pending" />
+    <item
+        android:id="@+id/status_completed"
+        android:title="@string/completed" />
+    <item
+        android:id="@+id/status_abandonado"
+        android:title="@string/abandoned" />
+    <item
+        android:id="@+id/status_sinclasificar"
+        android:title="@string/unclassified" />
+</menu>

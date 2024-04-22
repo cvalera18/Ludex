@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "772945166138",
+    "project_id": "gamelist-cv8",
+    "storage_bucket": "gamelist-cv8.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:772945166138:android:b7de3572ece9fd2a05da03",
+        "android_client_info": {
+          "package_name": "com.cvalera.gamelista"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyArVrCefAVR-x9j_J3NYH7jeBdZMzWyOaU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

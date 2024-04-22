@@ -1,0 +1,28 @@
+<resources>
+    <string name="app_name">GameList</string>
+    <string name="text_click">CLICK</string>
+    <string name="buscar">Search</string>
+    <string name="tlou1sinopsis">Conoce la emocionante historia y a los entrañables personajes de The Last of Us, ganador de más de 200 premios del Juego del año.
+            En una civilización devastada, donde los infectados y los empedernidos sobrevivientes proliferan, Joel, un protagonista cansado, es contratado para rescatar de contrabando
+            a una niña de 14 años llamada Ellie de una zona de cuarentena militar. Sin embargo, lo que comienza como un pequeño trabajo pronto se transforma en una brutal travesía por todo el país.</string>
+    <string name="games">Games</string>
+    <string name="my_list">My List</string>
+    <string name="fav">Favorites</string>
+    <string name="state">STATE</string>
+    <string name="platform">PLATFORM</string>
+    <string name="developer">DEVELOPER</string>
+    <string name="rel_date">RELEASE DATE</string>
+    <string name="synopsis">SYNOPSIS</string>
+    <string name="playing">Playing</string>
+    <string name="pending">Pending</string>
+    <string name="completed">Completed</string>
+    <string name="abandoned">Abandoned</string>
+    <string name="unclassified">Unclassified</string>
+    <string name="favorite">Favorite</string>
+    <string name="status_playing">Playing</string>
+    <string name="status_completed">Completed</string>
+    <string name="status_pending">Pending</string>
+    <string name="status_unclassified">Unclassified</string>
+    <string name="status_abandoned">Abandoned</string>
+    <string name="status_tried">Tried</string>
+</resources>
