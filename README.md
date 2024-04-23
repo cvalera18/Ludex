@@ -11,6 +11,9 @@ Ludex es una aplicación Android desarrollada utilizando Kotlin que permite a lo
 - **Persistencia de datos local:** Los datos de los usuarios se almacenan localmente utilizando Room.
 - **Diseño responsivo:** Interfaz adaptada a diferentes tamaños de pantalla y orientaciones.
 
+## Capturas de Pantalla
+![Google Pixel 4 XL (3) (1)](https://github.com/cvalera18/Ludex/assets/57680708/4c20495b-d76f-493e-85c4-dfecd47dbb45) ![Google Pixel 4 XL (2)](https://github.com/cvalera18/Ludex/assets/57680708/62fdfd11-9ea1-4798-9556-a4541b8cc2d5) ![Google Pixel 4 XL (4)](https://github.com/cvalera18/Ludex/assets/57680708/313f30bb-219e-4b1f-8fc0-d1413bfaca47)
+
 ## Tecnologías y Herramientas
 - **Lenguaje de Programación:** Kotlin
 - **Arquitectura de la Aplicación:** Clean Architecture, MVVM
@@ -27,23 +30,26 @@ El proyecto se organiza en las siguientes capas principales:
 - **di:** Módulos para la configuración de la inyección de dependencias con Hilt.
 
 ## Cómo Ejecutar
-Para ejecutar este proyecto, sigue estos pasos:
+Para ejecutar este proyecto y asegurar su funcionamiento correcto, sigue estos pasos:
 
-1. Clona este repositorio.
-2. Abre el proyecto en Android Studio.
-3. Ejecuta el proyecto en un emulador o dispositivo Android.
+1. **Clonar este repositorio**
+   - Usa el comando `git clone https://github.com/cvalera18/Ludex/` para obtener una copia local del proyecto.
+2. **Abrir el proyecto en Android Studio**
+   - Inicia Android Studio y selecciona 'Open an existing Android Studio project', luego navega hasta la carpeta donde clonaste el proyecto.
 
-## Capturas de Pantalla
+3. **Obtener una API Key de IGDB**
+   - Visita el sitio web de [IGDB](https://api.igdb.com/) y regístrate para obtener una cuenta de desarrollador si aún no tienes una.
+   - Sigue las instrucciones para solicitar una API Key. Normalmente, esto implica aceptar los términos de uso y completar un formulario con la descripción de cómo planeas usar los datos de IGDB.
+   - Una vez que tengas la API Key, necesitarás configurarla en tu proyecto.
 
+4. **Configurar la API Key en tu proyecto**
+   - Localiza el archivo de configuración en tu proyecto donde las claves API son almacenadas (`local.properties`).
+   - Añade tu API Key a este archivo de configuración. Asegúrate de no subir este archivo a repositorios públicos para mantener segura tu clave.
+   - Alternativamente, puedes configurar tu clave en el código en un lugar seguro y referenciarla desde allí.
 
-## Contribución
-Las contribuciones son bienvenidas. Si deseas contribuir, puedes seguir estos pasos:
-
-1. Haz un fork del repositorio.
-2. Crea una nueva rama para tus cambios (`git checkout -b feature/nueva-caracteristica`).
-3. Haz commit de tus cambios (`git commit -am 'Añade alguna característica'`).
-4. Realiza un push a la rama (`git push origin feature/nueva-caracteristica`).
-5. Crea un Pull Request.
+5. **Ejecutar el proyecto en un emulador o dispositivo Android**
+   - Asegúrate de que tu entorno de desarrollo está configurado para ejecutar aplicaciones Android, incluyendo un emulador configurado o un dispositivo Android conectado.
+   - Ejecuta la aplicación desde Android Studio usando 'Run > Run 'app''.
 
 ---
 
