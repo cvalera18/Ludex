@@ -12,7 +12,7 @@ Ludex es una aplicación Android desarrollada utilizando Kotlin que permite a lo
 - **Diseño responsivo:** Interfaz adaptada a diferentes tamaños de pantalla y orientaciones.
 
 ## Capturas de Pantalla
-![Google Pixel 4 XL (3) (1)](https://github.com/cvalera18/Ludex/assets/57680708/4c20495b-d76f-493e-85c4-dfecd47dbb45) ![Google Pixel 4 XL (2)](https://github.com/cvalera18/Ludex/assets/57680708/62fdfd11-9ea1-4798-9556-a4541b8cc2d5) ![Google Pixel 4 XL (4)](https://github.com/cvalera18/Ludex/assets/57680708/313f30bb-219e-4b1f-8fc0-d1413bfaca47)
+![Google Pixel 4 XL (3) (1)](https://github.com/cvalera18/Ludex/assets/57680708/4c20495b-d76f-493e-85c4-dfecd47dbb45) ![Google Pixel 4 XL (2)](https://github.com/cvalera18/Ludex/assets/57680708/62fdfd11-9ea1-4798-9556-a4541b8cc2d5) ![Google Pixel 4 XL (4)](https://github.com/cvalera18/Ludex/assets/57680708/313f30bb-219e-4b1f-8fc0-d1413bfaca47) ![Google Pixel 4 XL (3) (2)](https://github.com/cvalera18/Ludex/assets/57680708/8cbf15d9-b090-479f-a48f-46dd94c6bc87)
 
 ## Tecnologías y Herramientas
 - **Lenguaje de Programación:** Kotlin
