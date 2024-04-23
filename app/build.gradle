@@ -11,11 +11,11 @@ plugins {
 apply plugin: 'kotlin-kapt'
 android.buildFeatures.buildConfig true
 android {
-    namespace 'com.cvalera.gamelista'
+    namespace 'com.cvalera.ludex'
     compileSdk 34
 
     defaultConfig {
-        applicationId "com.cvalera.gamelista"
+        applicationId "com.cvalera.ludex"
         minSdk 24
         targetSdk 34
         versionCode 1
