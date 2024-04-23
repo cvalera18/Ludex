@@ -25,4 +25,5 @@
     <string name="status_unclassified">Unclassified</string>
     <string name="status_abandoned">Abandoned</string>
     <string name="status_tried">Tried</string>
+    <string name="cover_image" translatable="false">Cover Image</string>
 </resources>

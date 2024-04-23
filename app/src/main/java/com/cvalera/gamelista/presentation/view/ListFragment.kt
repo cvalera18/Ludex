@@ -1,13 +1,11 @@
 package com.cvalera.gamelista.presentation.view
 
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.widget.addTextChangedListener
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
@@ -15,11 +13,10 @@ import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.cvalera.gamelista.domain.model.GameStatus
-import com.cvalera.gamelista.R
-import com.cvalera.gamelista.presentation.adapter.GameListAdapter
 import com.cvalera.gamelista.databinding.FragmentListBinding
 import com.cvalera.gamelista.domain.model.Game
+import com.cvalera.gamelista.domain.model.GameStatus
+import com.cvalera.gamelista.presentation.adapter.GameListAdapter
 import com.cvalera.gamelista.presentation.viewmodel.ListViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
@@ -31,11 +28,6 @@ class ListFragment : Fragment() {
     private lateinit var adapter: GameListAdapter
     private val viewModel: ListViewModel by viewModels()
 
-    override fun onResume() {
-        super.onResume()
-//        getListGames()
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
@@ -46,12 +38,12 @@ class ListFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         observeGameList()
-
         configFilter()
         initRecyclerView()
         observeLoadingState()
         getListGames()
     }
+
     private fun observeLoadingState() {
         viewModel.isLoading.observe(viewLifecycleOwner) { isLoading ->
             binding.swipe.isRefreshing = isLoading
@@ -95,9 +87,9 @@ class ListFragment : Fragment() {
                 val pastVisibleItem: Int = llmanager.findLastCompletelyVisibleItemPosition()
                 val total = adapter.itemCount
                 if (visibleItemCount + pastVisibleItem >= total) {
-                        observeLoadingState()
-                        viewModel.loadMoreGames()
-                        getListGames()
+                    observeLoadingState()
+                    viewModel.loadMoreGames()
+                    getListGames()
                 }
                 super.onScrolled(recyclerView, dx, dy)
             }
@@ -106,12 +98,12 @@ class ListFragment : Fragment() {
 
     private fun onFavItem(game: Game) {
         viewModel.onFavItem(game)
-        getListGames()
     }
 
     private fun onListedItem(game: Game, status: GameStatus) {
         viewModel.updateGameStatus(game, status)
     }
+
     private fun onItemSelected(game: Game) {
         val action = ListFragmentDirections.actionListFragmentToDetailFragment(
             name = game.titulo,

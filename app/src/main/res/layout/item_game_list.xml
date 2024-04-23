@@ -18,7 +18,7 @@
             android:id="@+id/statusCard"
             style="@style/Widget.Material3.CardView.Filled"
             android:layout_width="wrap_content"
-            android:layout_height="40dp"
+            android:layout_height="44dp"
             android:layout_marginTop="10dp"
             app:cardElevation="3dp"
             app:layout_constraintStart_toStartOf="@+id/favCardView"
@@ -76,7 +76,7 @@
             android:id="@+id/favCardView"
             style="@style/Widget.Material3.CardView.Filled"
             android:layout_width="wrap_content"
-            android:layout_height="40dp"
+            android:layout_height="44dp"
             android:layout_marginStart="12dp"
             android:layout_marginTop="5dp"
             android:layout_marginBottom="10dp"
@@ -115,81 +115,12 @@
 
         </com.google.android.material.card.MaterialCardView>
 
-
-        <TextView
-            android:id="@+id/tvPlatform"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="20dp"
-            android:text="Plataformas"
-            android:textSize="11sp"
-            android:textStyle="italic"
-            android:visibility="gone"
-            app:layout_constraintEnd_toEndOf="@+id/ivPlatLogo4"
-            app:layout_constraintStart_toStartOf="@+id/ivPlatLogo3"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <ImageView
-            android:id="@+id/ivPlatLogo"
-            android:layout_width="45dp"
-            android:layout_height="30dp"
-            android:layout_marginTop="10dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/favCardView"
-            app:layout_constraintTop_toBottomOf="@+id/tvGame" />
-
-        <ImageView
-            android:id="@+id/ivPlatLogo2"
-            android:layout_width="45dp"
-            android:layout_height="30dp"
-            android:layout_marginStart="5dp"
-            android:layout_marginTop="10dp"
-            app:layout_constraintStart_toEndOf="@+id/ivPlatLogo"
-            app:layout_constraintTop_toBottomOf="@+id/tvGame" />
-
-        <ImageView
-            android:id="@+id/ivPlatLogo3"
-            android:layout_width="45dp"
-            android:layout_height="30dp"
-            android:layout_margin="5dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/favCardView"
-            app:layout_constraintTop_toBottomOf="@+id/ivPlatLogo" />
-
-        <ImageView
-            android:id="@+id/ivPlatLogo4"
-            android:layout_width="45dp"
-            android:layout_height="30dp"
-            android:layout_margin="5dp"
-            app:layout_constraintStart_toEndOf="@+id/ivPlatLogo3"
-            app:layout_constraintTop_toBottomOf="@+id/ivPlatLogo2" />
-
-        <ImageView
-            android:id="@+id/ivPlatLogo5"
-            android:layout_width="45dp"
-            android:layout_height="30dp"
-            android:layout_margin="5dp"
-            android:visibility="gone"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/favCardView"
-            app:layout_constraintTop_toBottomOf="@+id/ivPlatLogo3" />
-
-        <ImageView
-            android:id="@+id/ivPlatLogo6"
-            android:layout_width="45dp"
-            android:layout_height="30dp"
-            android:layout_margin="5dp"
-            android:visibility="gone"
-            app:layout_constraintStart_toEndOf="@+id/ivPlatLogo5"
-            app:layout_constraintTop_toBottomOf="@+id/ivPlatLogo4" />
-
         <ImageView
             android:id="@+id/ivGame"
             android:layout_width="110dp"
             android:layout_height="match_parent"
             android:layout_alignParentEnd="true"
-            android:src="@drawable/tloupt1"
+            android:contentDescription="@string/cover_image"
             app:layout_constraintStart_toStartOf="parent"
             tools:layout_editor_absoluteY="10dp" />
 

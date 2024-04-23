@@ -3,7 +3,7 @@
 
     <item
         android:id="@+id/listFragment"
-        android:icon="@drawable/baseline_list_alt_24"
+        android:icon="@drawable/gamepad_square_outline"
         android:title="@string/games"/>
 
     <item
@@ -13,7 +13,7 @@
 
     <item
         android:id="@+id/favFragment"
-        android:icon="@drawable/baseline_videogame_asset_24"
+        android:icon="@drawable/baseline_star_outline_24"
         android:title="@string/fav"/>
 
 </menu>
