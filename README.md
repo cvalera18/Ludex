@@ -1,7 +1,7 @@
-# GameListApp
+# Ludex
 
 ## Descripción
-GameListApp es una aplicación Android desarrollada utilizando Kotlin que permite a los usuarios gestionar una lista de juegos, marcándolos como favoritos, actualizando su estado y buscando títulos específicos. Este proyecto implementa Clean Architecture y utiliza MVVM para el diseño de la arquitectura de la interfaz de usuario. Además, incorpora Room para la persistencia de datos y Hilt para la inyección de dependencias.
+Ludex es una aplicación Android desarrollada utilizando Kotlin que permite a los usuarios gestionar una lista de juegos, marcándolos como favoritos, actualizando su estado y buscando títulos específicos. Este proyecto implementa Clean Architecture y utiliza MVVM para el diseño de la arquitectura de la interfaz de usuario. Además, incorpora Room para la persistencia de datos y Hilt para la inyección de dependencias.
 
 ## Características
 - **Gestión de juegos:** Crear, leer, actualizar y eliminar información sobre juegos.
