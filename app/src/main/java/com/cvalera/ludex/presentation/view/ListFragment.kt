@@ -42,6 +42,7 @@ class ListFragment : Fragment() {
         initRecyclerView()
         observeLoadingState()
         getListGames()
+        throw RuntimeException("Test Crash")
     }
 
     private fun observeLoadingState() {
