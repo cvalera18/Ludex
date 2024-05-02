@@ -1,4 +1,4 @@
-package com.cvalera.ludex.presentation.view
+package com.cvalera.ludex.presentation.detail
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment

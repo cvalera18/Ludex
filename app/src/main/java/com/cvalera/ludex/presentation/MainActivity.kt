@@ -1,4 +1,4 @@
-package com.cvalera.ludex.presentation.view
+package com.cvalera.ludex.presentation
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle

@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/detailFragment"
-        android:name="com.cvalera.ludex.presentation.view.DetailFragment"
+        android:name="com.cvalera.ludex.presentation.detail.DetailFragment"
         android:label="fragment_detail"
         tools:layout="@layout/fragment_detail">
         <argument
@@ -69,7 +69,7 @@
     </fragment>
     <fragment
         android:id="@+id/favFragment"
-        android:name="com.cvalera.ludex.presentation.view.FavFragment"
+        android:name="com.cvalera.ludex.presentation.fav.FavFragment"
         android:label="fragment_fav"
         tools:layout="@layout/fragment_fav" >
         <action
@@ -78,7 +78,7 @@
     </fragment>
     <fragment
         android:id="@+id/myListFragment"
-        android:name="com.cvalera.ludex.presentation.view.MyListFragment"
+        android:name="com.cvalera.ludex.presentation.mylist.MyListFragment"
         android:label="fragment_my_list"
         tools:layout="@layout/fragment_my_list" >
         <action
@@ -88,7 +88,7 @@
 
     <fragment
         android:id="@+id/listFragment"
-        android:name="com.cvalera.ludex.presentation.view.ListFragment"
+        android:name="com.cvalera.ludex.presentation.list.ListFragment"
         android:label="fragment_list"
         tools:layout="@layout/fragment_list" >
         <action

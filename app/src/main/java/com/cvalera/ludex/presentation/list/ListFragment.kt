@@ -1,4 +1,4 @@
-package com.cvalera.ludex.presentation.view
+package com.cvalera.ludex.presentation.list
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -17,7 +17,6 @@ import com.cvalera.ludex.databinding.FragmentListBinding
 import com.cvalera.ludex.domain.model.Game
 import com.cvalera.ludex.domain.model.GameStatus
 import com.cvalera.ludex.presentation.adapter.GameListAdapter
-import com.cvalera.ludex.presentation.viewmodel.ListViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 

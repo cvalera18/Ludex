@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".presentation.view.ListFragment">
+    tools:context=".presentation.list.ListFragment">
 
     <EditText
         android:id="@+id/etFilter"

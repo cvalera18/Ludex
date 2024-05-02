@@ -1,4 +1,4 @@
-package com.cvalera.ludex.presentation.viewmodel
+package com.cvalera.ludex.presentation.fav
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

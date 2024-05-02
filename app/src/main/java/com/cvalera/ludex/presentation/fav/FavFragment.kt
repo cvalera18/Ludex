@@ -1,5 +1,6 @@
-package com.cvalera.ludex.presentation.view
+package com.cvalera.ludex.presentation.fav
 
+import android.app.AlertDialog
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
@@ -15,25 +16,25 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.cvalera.ludex.domain.model.GameStatus
 import com.cvalera.ludex.R
 import com.cvalera.ludex.presentation.adapter.GameListAdapter
-import com.cvalera.ludex.databinding.FragmentMyListBinding
+import com.cvalera.ludex.databinding.FragmentFavBinding
 import com.cvalera.ludex.domain.model.Game
-import com.cvalera.ludex.presentation.viewmodel.MyListViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class MyListFragment : Fragment() {
+class FavFragment : Fragment() {
 
-    private var _binding: FragmentMyListBinding? = null
+    private var _binding: FragmentFavBinding? = null
     private val binding get() = _binding!!
     private lateinit var adapter: GameListAdapter
-    private val viewModel: MyListViewModel by viewModels()
     private var isLoading = false
+
+    private val viewModel: FavViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentMyListBinding.inflate(inflater, container, false)
+        _binding = FragmentFavBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -43,26 +44,27 @@ class MyListFragment : Fragment() {
         searchInList()
         initRecyclerView()
         configSwipe()
-        observeMyGameList()
-        viewModel.getListGames()
+        observeFavGameList()
+        getListGames()
     }
-
 
     override fun onResume() {
-        super.onResume()
+    super.onResume()
+    getListGames()
+    }
+    private fun getListGames() {
         viewModel.getListGames()
     }
 
-
-    private fun observeMyGameList() {
-        viewModel.listedGameList.observe(viewLifecycleOwner) { listedGameList ->
-            adapter.updateGames(listedGameList)
+    private fun observeFavGameList() {
+        viewModel.favGameList.observe(viewLifecycleOwner) { favGameList ->
+            adapter.updateGames(favGameList)
         }
     }
 
     private fun configSwipe() {
 
-//        binding.swipe.setColorSchemeResources(R.color.grey, R.color.blueoscuro)
+//        binding.swipe.setColorSchemeResources(R.color.md_theme_outline_highContrast, R.color.md_theme_primary_highContrast)
         binding.swipe.setOnRefreshListener {
             if (!isLoading) {
                 isLoading = true
@@ -81,36 +83,34 @@ class MyListFragment : Fragment() {
         }
     }
 
-    private fun filterByStatus(status: GameStatus) {
-        viewModel.filterByStatus(status)
-    }
-
     private fun filterChips() {
         binding.chipGroup.setOnCheckedChangeListener { group, checkedId ->
-            // Comprueba si no se ha seleccionado ningún chip
             if (checkedId == View.NO_ID) {
                 viewModel.getListGames()
             } else {
-                // Si se ha seleccionado un chip, aplica el filtro correspondiente
                 when (checkedId) {
                     R.id.chipCompletado -> {
                         filterByStatus(GameStatus.COMPLETADO)
                     }
-
                     R.id.chipPendiente -> {
                         filterByStatus(GameStatus.PENDIENTE)
                     }
-
                     R.id.chipAbandonado -> {
                         filterByStatus(GameStatus.ABANDONADO)
                     }
-
                     R.id.chipJugando -> {
                         filterByStatus(GameStatus.JUGANDO)
+                    }
+                    R.id.chipSC -> {
+                        filterByStatus(GameStatus.SIN_CLASIFICAR)
                     }
                 }
             }
         }
+    }
+
+    private fun filterByStatus(status: GameStatus) {
+        viewModel.filterByStatus(status)
     }
 
     private fun initRecyclerView() {
@@ -127,15 +127,20 @@ class MyListFragment : Fragment() {
     }
 
     private fun onFavItem(game: Game) {
-        viewModel.onFavItem(game)
-    }
-
-    private fun onListedItem(game: Game, status: GameStatus) {
-        viewModel.updateGameStatus(game, status)
+            val alertDialog = AlertDialog.Builder(context)
+                .setTitle("Confirmar eliminación")
+                .setMessage("¿Estás seguro de que quieres eliminar este juego de la lista de favoritos?")
+                .setPositiveButton("Eliminar") { _, _ ->
+                    // Acción de eliminación del juego
+                    viewModel.onFavItem(game)
+                }
+                .setNegativeButton("Cancelar", null)
+                .create()
+            alertDialog.show()
     }
 
     private fun onItemSelected(game: Game) {
-        val action = MyListFragmentDirections.actionMyListFragmentToDetailFragment(
+        val action = FavFragmentDirections.actionFavFragment2ToDetailFragment(
             name = game.titulo,
             status = getString(game.status.stringResId),
             pic = game.imagen,
@@ -152,4 +157,9 @@ class MyListFragment : Fragment() {
         )
         findNavController().navigate(action)
     }
+
+    private fun onListedItem(game: Game, status: GameStatus) {
+        viewModel.updateGameStatus(game, status)
+    }
+
 }

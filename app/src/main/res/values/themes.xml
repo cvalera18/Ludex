@@ -29,15 +29,12 @@
         <item name="colorPrimaryInverse">@color/md_theme_light_inversePrimary</item>
     </style>
 
-<!--    <style name="CustomCardViewStyle" parent="@style/Widget.MaterialComponents.CardView">-->
-<!--        <item name="shapeAppearanceOverlay">@style/ShapeAppearanceOverlay_card_custom_corners</item>-->
-<!--    </style>-->
+    <style name="FormEditText" parent="Widget.AppCompat.EditText">
+        <item name="android:textSize">14sp</item>
+        <item name="android:paddingLeft">16dp</item>
+        <item name="singleLine">true</item>
+        <item name="maxLines">1</item>
+        <item name="android:paddingRight">16dp</item>
+    </style>
 
-<!--    <style name="ShapeAppearanceOverlay_card_custom_corners" parent="">-->
-<!--        <item name="cornerFamily">rounded</item>-->
-<!--        <item name="cornerSizeTopRight">0dp</item>-->
-<!--        <item name="cornerSizeTopLeft">20dp</item>-->
-<!--        <item name="cornerSizeBottomRight">0dp</item>-->
-<!--        <item name="cornerSizeBottomLeft">20dp</item>-->
-<!--    </style>-->
 </resources>

@@ -5,23 +5,34 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/authLayout"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
+    android:background="@color/md_theme_light_inversePrimary"
     tools:context=".presentation.auth.AuthActivity">
+
+    <include
+        android:id="@+id/viewHeader"
+        layout="@layout/view_header"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/linearLayout"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <LinearLayout
         android:id="@+id/linearLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
         android:orientation="vertical"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout2"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintStart_toStartOf="parent">
 
         <EditText
             android:id="@+id/etTextEmail"
+            style="@style/FormEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:autofillHints="emailAddress"
@@ -31,6 +42,7 @@
 
         <EditText
             android:id="@+id/etTextPassword"
+            style="@style/FormEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
@@ -41,35 +53,37 @@
 
 
     </LinearLayout>
+
     <LinearLayout
+        android:id="@+id/linearLayout2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
         android:orientation="horizontal"
+        android:layout_marginBottom="155dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout">
+        app:layout_constraintStart_toStartOf="parent">
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/signUpButton"
-            android:layout_margin="8dp"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_margin="8dp"
             android:layout_weight="1"
-            app:cornerRadius="5dp"
+            android:text="Sign-up"
             android:textSize="18dp"
-            android:text="Sign-up" />
+            app:cornerRadius="5dp" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/signInButton"
-            android:backgroundTint="@color/material_dynamic_tertiary10"
-            android:layout_margin="8dp"
-            app:cornerRadius="5dp"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_margin="8dp"
             android:layout_weight="1"
+            android:backgroundTint="@color/material_dynamic_tertiary10"
+            android:text="Sign-in"
             android:textSize="18dp"
-            android:text="Sign-in" />
+            app:cornerRadius="5dp" />
 
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
