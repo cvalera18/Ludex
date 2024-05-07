@@ -28,7 +28,7 @@ object AppModule {
         gameRemoteDataSource: GameRemoteDataSource
     ): GameRepository = GameRepositoryImpl(gameRemoteDataSource, localDataSource)
 
-    @Singleton
-    @Provides
-    fun provideAuthRepository(): AuthRepository = AuthRepository()
+//    @Singleton
+//    @Provides
+//    fun provideAuthRepository(): AuthRepository = AuthRepository()
 }

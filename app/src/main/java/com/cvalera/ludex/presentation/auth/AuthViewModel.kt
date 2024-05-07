@@ -7,38 +7,38 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-@HiltViewModel
-class AuthViewModel @Inject constructor(private val authRepository: AuthRepository) : ViewModel() {
-
-    fun createUser(
-        email: String,
-        password: String,
-        onSuccess: (String) -> Unit,
-        onError: () -> Unit
-    ) {
-        viewModelScope.launch {
-            try {
-                val userData = authRepository.createUser(email, password)
-                onSuccess(userData)
-            } catch (e: Exception) {
-                onError()
-            }
-        }
-    }
-
-    fun signInUser(
-        email: String,
-        password: String,
-        onSuccess: (String) -> Unit,
-        onError: () -> Unit
-    ) {
-        viewModelScope.launch {
-            try {
-                val userData = authRepository.signInUser(email, password)
-                onSuccess(userData)
-            } catch (e: Exception) {
-                onError()
-            }
-        }
-    }
-}
+//@HiltViewModel
+//class AuthViewModel @Inject constructor(private val authRepository: AuthRepository) : ViewModel() {
+//
+//    fun createUser(
+//        email: String,
+//        password: String,
+//        onSuccess: (String) -> Unit,
+//        onError: () -> Unit
+//    ) {
+//        viewModelScope.launch {
+//            try {
+//                val userData = authRepository.createUser(email, password)
+//                onSuccess(userData)
+//            } catch (e: Exception) {
+//                onError()
+//            }
+//        }
+//    }
+//
+//    fun signInUser(
+//        email: String,
+//        password: String,
+//        onSuccess: (String) -> Unit,
+//        onError: () -> Unit
+//    ) {
+//        viewModelScope.launch {
+//            try {
+//                val userData = authRepository.signInUser(email, password)
+//                onSuccess(userData)
+//            } catch (e: Exception) {
+//                onError()
+//            }
+//        }
+//    }
+//}
