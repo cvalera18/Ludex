@@ -37,7 +37,7 @@ tools:context=".presentation.auth.login.LoginActivity">
         style="@style/FormEditText"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:hint="Usuario o correo"
+        android:hint="E-mail"
         android:imeOptions="actionNext"
         android:inputType="textEmailAddress" />
 
