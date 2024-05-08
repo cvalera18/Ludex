@@ -11,10 +11,12 @@ class CreateAccountUseCase @Inject constructor(
 ) {
 
     suspend operator fun invoke(userSignIn: UserSignIn): Boolean {
-        val accountCreated =
-            authenticationService.createAccount(userSignIn.email, userSignIn.password) != null
+        // Intenta crear una cuenta de autenticación
+        val accountCreated = authenticationService.createAccount(userSignIn.email, userSignIn.password) != null
+
+        // Si la cuenta se crea exitosamente, intenta crear el registro en la base de datos
         return if (accountCreated) {
-            userService.createUserTable(userSignIn)
+            userService.createUser(userSignIn)
         } else {
             false
         }

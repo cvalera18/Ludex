@@ -1,11 +1,14 @@
 package com.cvalera.ludex.presentation
 
+import android.content.Context
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import com.cvalera.ludex.R
 import com.cvalera.ludex.databinding.ActivityMainBinding
+import com.cvalera.ludex.presentation.auth.signin.SignInActivity
 import com.google.firebase.analytics.FirebaseAnalytics
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -15,6 +18,10 @@ enum class ProviderType {
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
+    companion object {
+        fun create(context: Context): Intent =
+            Intent(context, MainActivity::class.java)
+    }
 
     private lateinit var binding: ActivityMainBinding
 

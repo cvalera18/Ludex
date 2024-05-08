@@ -7,20 +7,24 @@ import javax.inject.Inject
 class UserService @Inject constructor(private val firebase: FirebaseClient) {
 
     companion object {
-        const val USER_COLLECTION = "users"
+        const val USERS_NODE = "users"
     }
 
-    suspend fun createUserTable(userSignIn: UserSignIn) = runCatching {
-
+    suspend fun createUser(userSignIn: UserSignIn): Boolean = runCatching {
         val user = hashMapOf(
             "email" to userSignIn.email,
             "nickname" to userSignIn.nickName,
             "realname" to userSignIn.realName
         )
 
-//        firebase.db
-//            .collection(USER_COLLECTION)
-//            .add(user).await()
+        // Obtiene una nueva clave para un nuevo usuario
+        val userKey = firebase.db.child(USERS_NODE).push().key ?: throw Exception("Invalid key")
 
-    }.isSuccess
+        // Establece los valores del usuario en la nueva clave
+        firebase.db.child(USERS_NODE).child(userKey).setValue(user).await()
+
+        true
+    }.getOrElse {
+        false
+    }
 }

@@ -19,6 +19,7 @@ import com.cvalera.ludex.core.ex.show
 import com.cvalera.ludex.core.ex.span
 import com.cvalera.ludex.core.ex.toast
 import com.cvalera.ludex.databinding.ActivityLoginBinding
+import com.cvalera.ludex.presentation.MainActivity
 import com.cvalera.ludex.presentation.auth.login.model.UserLogin
 import com.cvalera.ludex.presentation.auth.signin.SignInActivity
 import com.cvalera.ludex.presentation.auth.verification.VerificationActivity
@@ -158,7 +159,8 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun goToDetail() {
-        LoginSuccessDialog.create().show(dialogLauncher, this)
+//        LoginSuccessDialog.create().show(dialogLauncher, this)
+        startActivity(MainActivity.create(this))
     }
 
     private fun goToVerify() {
