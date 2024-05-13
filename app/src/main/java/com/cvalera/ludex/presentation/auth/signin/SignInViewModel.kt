@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.cvalera.ludex.core.Event
 import com.cvalera.ludex.domain.usecase.CreateAccountUseCase
+import com.cvalera.ludex.domain.usecase.RecoverPasswordUseCase
 import com.cvalera.ludex.presentation.auth.signin.model.UserSignIn
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow

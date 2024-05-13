@@ -12,6 +12,7 @@ tools:context=".presentation.auth.signin.SignInActivity">
     layout="@layout/view_header"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:layout_marginTop="10dp"
     android:layout_marginBottom="4dp"
     app:layout_constraintBottom_toTopOf="@+id/formView"
     app:layout_constraintTop_toTopOf="parent"

@@ -118,6 +118,7 @@ class SignInActivity : AppCompatActivity() {
         signInViewModel.showErrorDialog.observe(this) { showError ->
             if (showError) showErrorDialog()
         }
+
     }
 
     private fun showErrorDialog() {

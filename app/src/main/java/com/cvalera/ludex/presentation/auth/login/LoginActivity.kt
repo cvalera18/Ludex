@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.inputmethod.EditorInfo
+import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
@@ -76,6 +77,15 @@ class LoginActivity : AppCompatActivity() {
                 binding.etPassword.text.toString()
             )
         }
+
+        binding.tvForgotPassword.setOnClickListener {
+            val email = binding.etEmail.text.toString()
+            if (email.isNotBlank()) {
+                loginViewModel.recoverPassword(email)
+            } else {
+                showMessage(getString(R.string.enter_email_message))
+            }
+        }
     }
 
     private fun initObservers() {
@@ -110,6 +120,16 @@ class LoginActivity : AppCompatActivity() {
         lifecycleScope.launchWhenStarted {
             loginViewModel.viewState.collect { viewState ->
                 updateUI(viewState)
+            }
+        }
+
+        loginViewModel.passwordResetEmailSent.observe(this) { event ->
+            event.getContentIfNotHandled()?.let { success ->
+                if (success) {
+                    showMessage(getString(R.string.password_reset_email_sent))
+                } else {
+                    showMessage(getString(R.string.password_reset_email_failed))
+                }
             }
         }
     }
@@ -165,5 +185,9 @@ class LoginActivity : AppCompatActivity() {
 
     private fun goToVerify() {
         startActivity(VerificationActivity.create(this))
+    }
+
+    private fun showMessage(message: String) {
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
     }
 }

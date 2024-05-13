@@ -8,6 +8,7 @@ import androidx.lifecycle.viewModelScope
 import com.cvalera.ludex.core.Event
 import com.cvalera.ludex.data.response.LoginResult
 import com.cvalera.ludex.domain.usecase.LoginUseCase
+import com.cvalera.ludex.domain.usecase.RecoverPasswordUseCase
 import com.cvalera.ludex.presentation.auth.login.model.UserLogin
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -16,7 +17,10 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class LoginViewModel @Inject constructor(val loginUseCase: LoginUseCase) : ViewModel() {
+class LoginViewModel @Inject constructor(
+    val loginUseCase: LoginUseCase,
+    private val recoverPasswordUseCase: RecoverPasswordUseCase
+) : ViewModel() {
 
     private companion object {
         const val MIN_PASSWORD_LENGTH = 6
@@ -45,6 +49,9 @@ class LoginViewModel @Inject constructor(val loginUseCase: LoginUseCase) : ViewM
     private var _showErrorDialog = MutableLiveData(UserLogin())
     val showErrorDialog: LiveData<UserLogin>
         get() = _showErrorDialog
+
+    private val _passwordResetEmailSent = MutableLiveData<Event<Boolean>>()
+    val passwordResetEmailSent: LiveData<Event<Boolean>> get() = _passwordResetEmailSent
 
     fun onLoginSelected(email: String, password: String) {
         if (isValidEmail(email) && isValidPassword(password)) {
@@ -88,6 +95,16 @@ class LoginViewModel @Inject constructor(val loginUseCase: LoginUseCase) : ViewM
 
     fun onSignInSelected() {
         _navigateToSignIn.value = Event(true)
+    }
+
+    fun recoverPassword(email: String) {
+        viewModelScope.launch {
+            val result = recoverPasswordUseCase(email)
+            _passwordResetEmailSent.value = Event(result)
+            if (!result) {
+                _showErrorDialog.value = UserLogin(showErrorDialog = true)
+            }
+        }
     }
 
     private fun isValidEmail(email: String) =
