@@ -6,6 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.cvalera.ludex.core.Event
+import com.cvalera.ludex.data.network.FirebaseClient
 import com.cvalera.ludex.data.response.LoginResult
 import com.cvalera.ludex.domain.usecase.LoginUseCase
 import com.cvalera.ludex.domain.usecase.RecoverPasswordUseCase
@@ -19,16 +20,17 @@ import javax.inject.Inject
 @HiltViewModel
 class LoginViewModel @Inject constructor(
     val loginUseCase: LoginUseCase,
-    private val recoverPasswordUseCase: RecoverPasswordUseCase
+    private val recoverPasswordUseCase: RecoverPasswordUseCase,
+    private val firebaseClient: FirebaseClient
 ) : ViewModel() {
 
     private companion object {
         const val MIN_PASSWORD_LENGTH = 6
     }
 
-    private val _navigateToDetails = MutableLiveData<Event<Boolean>>()
-    val navigateToDetails: LiveData<Event<Boolean>>
-        get() = _navigateToDetails
+    private val _navigateToList = MutableLiveData<Event<Boolean>>()
+    val navigateToList: LiveData<Event<Boolean>>
+        get() = _navigateToList
 
     private val _navigateToForgotPassword = MutableLiveData<Event<Boolean>>()
     val navigateToForgotPassword: LiveData<Event<Boolean>>
@@ -72,13 +74,20 @@ class LoginViewModel @Inject constructor(
                 }
                 is LoginResult.Success -> {
                     if (result.verified) {
-                        _navigateToDetails.value = Event(true)
+                        _navigateToList.value = Event(true)
                     } else {
                         _navigateToVerifyAccount.value = Event(true)
                     }
                 }
             }
             _viewState.value = LoginViewState(isLoading = false)
+        }
+    }
+
+    fun signInAnonymously() {
+        viewModelScope.launch {
+            val result = firebaseClient.signInAnonymously()
+            _navigateToList.value = Event(result != null)
         }
     }
 

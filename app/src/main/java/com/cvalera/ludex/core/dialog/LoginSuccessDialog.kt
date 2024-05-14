@@ -9,6 +9,7 @@ import android.os.Bundle
 import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
 import com.cvalera.ludex.databinding.DialogLoginSuccessBinding
+import com.cvalera.ludex.presentation.MainActivity
 
 class LoginSuccessDialog : DialogFragment() {
 
@@ -27,7 +28,10 @@ class LoginSuccessDialog : DialogFragment() {
     @SuppressLint("InflateParams")
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         val binding = DialogLoginSuccessBinding.inflate(requireActivity().layoutInflater)
-        binding.btnPositive.setOnClickListener { dismiss() }
+        binding.btnPositive.setOnClickListener {
+            startActivity(MainActivity.create(requireContext()))
+            dismiss()
+        }
 
         return AlertDialog.Builder(requireActivity())
             .setView(binding.root)

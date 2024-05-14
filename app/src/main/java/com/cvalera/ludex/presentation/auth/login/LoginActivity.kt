@@ -4,7 +4,6 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.inputmethod.EditorInfo
-import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
@@ -12,7 +11,6 @@ import androidx.lifecycle.lifecycleScope
 import com.cvalera.ludex.R
 import com.cvalera.ludex.core.dialog.DialogFragmentLauncher
 import com.cvalera.ludex.core.dialog.ErrorDialog
-import com.cvalera.ludex.core.dialog.LoginSuccessDialog
 import com.cvalera.ludex.core.ex.dismissKeyboard
 import com.cvalera.ludex.core.ex.loseFocusAfterAction
 import com.cvalera.ludex.core.ex.onTextChanged
@@ -56,6 +54,11 @@ class LoginActivity : AppCompatActivity() {
             getString(R.string.login_footer_unselected),
             getString(R.string.login_footer_selected)
         )
+        binding.btnAnonymous.setOnClickListener {
+            loginViewModel.signInAnonymously()
+            // TODO Quitar este toast, es solo para probar.
+            toast("Se accedió como anónimo")
+        }
     }
 
     private fun initListeners() {
@@ -83,15 +86,15 @@ class LoginActivity : AppCompatActivity() {
             if (email.isNotBlank()) {
                 loginViewModel.recoverPassword(email)
             } else {
-                showMessage(getString(R.string.enter_email_message))
+                toast(getString(R.string.enter_email_message))
             }
         }
     }
 
     private fun initObservers() {
-        loginViewModel.navigateToDetails.observe(this) {
+        loginViewModel.navigateToList.observe(this) {
             it.getContentIfNotHandled()?.let {
-                goToDetail()
+                goToList()
             }
         }
 
@@ -126,9 +129,9 @@ class LoginActivity : AppCompatActivity() {
         loginViewModel.passwordResetEmailSent.observe(this) { event ->
             event.getContentIfNotHandled()?.let { success ->
                 if (success) {
-                    showMessage(getString(R.string.password_reset_email_sent))
+                    toast(getString(R.string.password_reset_email_sent))
                 } else {
-                    showMessage(getString(R.string.password_reset_email_failed))
+                    toast(getString(R.string.password_reset_email_failed))
                 }
             }
         }
@@ -178,16 +181,11 @@ class LoginActivity : AppCompatActivity() {
         startActivity(SignInActivity.create(this))
     }
 
-    private fun goToDetail() {
-//        LoginSuccessDialog.create().show(dialogLauncher, this)
+    private fun goToList() {
         startActivity(MainActivity.create(this))
     }
 
     private fun goToVerify() {
         startActivity(VerificationActivity.create(this))
-    }
-
-    private fun showMessage(message: String) {
-        Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
     }
 }
