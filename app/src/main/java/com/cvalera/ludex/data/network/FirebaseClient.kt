@@ -1,7 +1,10 @@
 package com.cvalera.ludex.data.network
 
+import com.google.android.gms.tasks.Task
+import com.google.firebase.auth.AuthResult
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
+import com.google.firebase.auth.GoogleAuthProvider
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import kotlinx.coroutines.tasks.await
@@ -24,5 +27,10 @@ class FirebaseClient @Inject constructor() {
         true
     }.getOrElse {
         false
+    }
+
+    fun firebaseAuthWithGoogle(idToken: String?): Task<AuthResult> {
+        val credential = GoogleAuthProvider.getCredential(idToken, null)
+        return auth.signInWithCredential(credential)
     }
 }

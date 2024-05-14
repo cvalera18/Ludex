@@ -61,4 +61,7 @@
     <string name="password_reset_email_sent">Reset email sent</string>
     <string name="password_reset_email_failed">Reset email failed</string>
     <string name="enter_email_message">Enter email</string>
+    <string name="error">Error</string>
+    <string name="ok">Ok</string>
+    <string name="default_web_client_id">993686722819-5tlf50lkhq8khatufi2rq4il3fsdvsn7.apps.googleusercontent.com</string>
 </resources>

@@ -6,6 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.cvalera.ludex.core.Event
+import com.cvalera.ludex.data.network.AuthenticationService
 import com.cvalera.ludex.data.network.FirebaseClient
 import com.cvalera.ludex.data.response.LoginResult
 import com.cvalera.ludex.domain.usecase.LoginUseCase
@@ -21,7 +22,8 @@ import javax.inject.Inject
 class LoginViewModel @Inject constructor(
     val loginUseCase: LoginUseCase,
     private val recoverPasswordUseCase: RecoverPasswordUseCase,
-    private val firebaseClient: FirebaseClient
+    private val firebaseClient: FirebaseClient,
+    private val authenticationService: AuthenticationService
 ) : ViewModel() {
 
     private companion object {
@@ -65,22 +67,9 @@ class LoginViewModel @Inject constructor(
 
     private fun loginUser(email: String, password: String) {
         viewModelScope.launch {
-            _viewState.value = LoginViewState(isLoading = true)
-            when (val result = loginUseCase(email, password)) {
-                LoginResult.Error -> {
-                    _showErrorDialog.value =
-                        UserLogin(email = email, password = password, showErrorDialog = true)
-                    _viewState.value = LoginViewState(isLoading = false)
-                }
-                is LoginResult.Success -> {
-                    if (result.verified) {
-                        _navigateToList.value = Event(true)
-                    } else {
-                        _navigateToVerifyAccount.value = Event(true)
-                    }
-                }
-            }
-            _viewState.value = LoginViewState(isLoading = false)
+            _viewState.value = _viewState.value.copy(isLoading = true)
+            val result = loginUseCase(email, password)
+            handleLoginResult(result)
         }
     }
 
@@ -98,9 +87,39 @@ class LoginViewModel @Inject constructor(
         )
     }
 
-    fun onForgotPasswordSelected() {
-        _navigateToForgotPassword.value = Event(true)
+    fun authenticateWithGoogle(idToken: String?) {
+        viewModelScope.launch {
+            _viewState.value = _viewState.value.copy(isLoading = true)
+            val result = authenticationService.loginWithGoogle(idToken ?: "")
+            handleLoginResult(result)
+        }
     }
+
+    private fun handleLoginResult(result: LoginResult) {
+        _viewState.value = _viewState.value.copy(isLoading = false)
+        when (result) {
+            is LoginResult.Success -> {
+                _viewState.value = _viewState.value.copy(
+                    isUserAuthenticated = result.verified,
+                    authenticatedUser = UserLogin(email = result.email)
+                )
+                if (result.verified) {
+                    _navigateToList.value = Event(true)
+                } else {
+                    _navigateToVerifyAccount.value = Event(true)
+                }
+            }
+            is LoginResult.Error -> {
+                _viewState.value = _viewState.value.copy(errorMessage = result.message)
+                _showErrorDialog.value = UserLogin(showErrorDialog = true)
+            }
+        }
+    }
+
+
+    //    fun onForgotPasswordSelected() {
+//        _navigateToForgotPassword.value = Event(true)
+//    }
 
     fun onSignInSelected() {
         _navigateToSignIn.value = Event(true)

@@ -1,8 +1,10 @@
 package com.cvalera.ludex.presentation.auth.login
 
+import android.content.ContentValues.TAG
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.inputmethod.EditorInfo
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -22,6 +24,9 @@ import com.cvalera.ludex.presentation.MainActivity
 import com.cvalera.ludex.presentation.auth.login.model.UserLogin
 import com.cvalera.ludex.presentation.auth.signin.SignInActivity
 import com.cvalera.ludex.presentation.auth.verification.VerificationActivity
+import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions
+import com.google.android.gms.common.api.ApiException
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -32,6 +37,7 @@ class LoginActivity : AppCompatActivity() {
         fun create(context: Context): Intent =
             Intent(context, LoginActivity::class.java)
 
+        private const val RC_SIGN_IN = 100
     }
 
     private lateinit var binding: ActivityLoginBinding
@@ -44,8 +50,32 @@ class LoginActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
         initUI()
     }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+        if (requestCode == RC_SIGN_IN) {
+            val task = GoogleSignIn.getSignedInAccountFromIntent(data)
+
+            try {
+                val account = task.getResult(ApiException::class.java)
+                account?.idToken?.let {
+                    loginViewModel.authenticateWithGoogle(it)
+                    toast("Google sign in success")
+                } ?: run {
+                    Log.w(TAG, "ID Token is null")
+                    toast("Google sign in failed: ID Token is null")
+                }
+            } catch (e: ApiException) {
+                Log.w(TAG, "Google sign in failed", e)
+                toast("Google sign in failed")
+            }
+        }
+    }
+
 
     private fun initUI() {
         initListeners()
@@ -54,11 +84,6 @@ class LoginActivity : AppCompatActivity() {
             getString(R.string.login_footer_unselected),
             getString(R.string.login_footer_selected)
         )
-        binding.btnAnonymous.setOnClickListener {
-            loginViewModel.signInAnonymously()
-            // TODO Quitar este toast, es solo para probar.
-            toast("Se accedió como anónimo")
-        }
     }
 
     private fun initListeners() {
@@ -69,7 +94,7 @@ class LoginActivity : AppCompatActivity() {
         binding.etPassword.setOnFocusChangeListener { _, hasFocus -> onFieldChanged(hasFocus) }
         binding.etPassword.onTextChanged { onFieldChanged() }
 
-        binding.tvForgotPassword.setOnClickListener { loginViewModel.onForgotPasswordSelected() }
+//        binding.tvForgotPassword.setOnClickListener { loginViewModel.onForgotPasswordSelected() }
 
         binding.viewBottom.tvFooter.setOnClickListener { loginViewModel.onSignInSelected() }
 
@@ -89,9 +114,30 @@ class LoginActivity : AppCompatActivity() {
                 toast(getString(R.string.enter_email_message))
             }
         }
+
+        binding.btnAnonymous.setOnClickListener {
+            loginViewModel.signInAnonymously()
+            // TODO Quitar este toast, es solo para probar.
+            toast("Se accedió como anónimo")
+        }
+
+        binding.viewBottom.cardGoogle.setOnClickListener{
+            val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestIdToken(getString(R.string.default_web_client_id))
+                .requestEmail()
+                .build()
+
+            val googleSignInClient = GoogleSignIn.getClient(this, gso)
+            val signInIntent = googleSignInClient.signInIntent
+            googleSignInClient.signOut()
+
+            startActivityForResult(signInIntent, RC_SIGN_IN)
+        }
+
     }
 
     private fun initObservers() {
+        // Observadores para la navegación y eventos específicos
         loginViewModel.navigateToList.observe(this) {
             it.getContentIfNotHandled()?.let {
                 goToList()
@@ -120,12 +166,6 @@ class LoginActivity : AppCompatActivity() {
             if (userLogin.showErrorDialog) showErrorDialog(userLogin)
         }
 
-        lifecycleScope.launchWhenStarted {
-            loginViewModel.viewState.collect { viewState ->
-                updateUI(viewState)
-            }
-        }
-
         loginViewModel.passwordResetEmailSent.observe(this) { event ->
             event.getContentIfNotHandled()?.let { success ->
                 if (success) {
@@ -135,16 +175,28 @@ class LoginActivity : AppCompatActivity() {
                 }
             }
         }
+
+        // Observador para los estados del LoginViewState
+        lifecycleScope.launchWhenStarted {
+            loginViewModel.viewState.collect { viewState ->
+                updateUI(viewState)
+                if (viewState.isUserAuthenticated) {
+                    goToList()
+                }
+                viewState.errorMessage?.let { errorMessage ->
+                    showErrorDialog(errorMessage)
+                }
+            }
+        }
     }
 
+
     private fun updateUI(viewState: LoginViewState) {
-        with(binding) {
-            pbLoading.isVisible = viewState.isLoading
-            tilEmail.error =
-                if (viewState.isValidEmail) null else getString(R.string.login_error_mail)
-            tilPassword.error =
-                if (viewState.isValidPassword) null else getString(R.string.login_error_password)
-        }
+        binding.pbLoading.isVisible = viewState.isLoading
+        binding.tilEmail.error =
+            if (viewState.isValidEmail) null else getString(R.string.login_error_mail)
+        binding.tilPassword.error =
+            if (viewState.isValidPassword) null else getString(R.string.login_error_password)
     }
 
     private fun onFieldChanged(hasFocus: Boolean = false) {
@@ -155,6 +207,7 @@ class LoginActivity : AppCompatActivity() {
             )
         }
     }
+
 
     private fun showErrorDialog(userLogin: UserLogin) {
         ErrorDialog.create(
@@ -173,6 +226,16 @@ class LoginActivity : AppCompatActivity() {
         ).show(dialogLauncher, this)
     }
 
+    private fun showErrorDialog(errorMessage: String) {
+        ErrorDialog.create(
+            title = getString(R.string.error),
+            description = errorMessage,
+            negativeAction = ErrorDialog.Action(getString(R.string.ok)) { dialog ->
+                dialog.dismiss()
+            }
+        ).show(dialogLauncher, this)
+    }
+
     private fun goToForgotPassword() {
         toast(getString(R.string.feature_not_allowed))
     }
@@ -183,6 +246,7 @@ class LoginActivity : AppCompatActivity() {
 
     private fun goToList() {
         startActivity(MainActivity.create(this))
+        finish()
     }
 
     private fun goToVerify() {

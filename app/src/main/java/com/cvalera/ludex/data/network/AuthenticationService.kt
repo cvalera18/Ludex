@@ -1,5 +1,6 @@
 package com.cvalera.ludex.data.network
 
+import android.widget.Toast
 import com.cvalera.ludex.data.response.LoginResult
 import com.google.firebase.auth.AuthResult
 import kotlinx.coroutines.delay
@@ -20,9 +21,26 @@ class AuthenticationService @Inject constructor(private val firebase: FirebaseCl
         }
     }
 
-    suspend fun login(email: String, password: String): LoginResult = runCatching {
-        firebase.auth.signInWithEmailAndPassword(email, password).await()
+    suspend fun login(email: String, password: String): LoginResult {
+        return try {
+            val result = firebase.auth.signInWithEmailAndPassword(email, password).await()
+            result.user?.let {
+                if (it.isEmailVerified) {
+                    LoginResult.Success(it.isEmailVerified, it.email ?: "No email")
+                } else {
+                    LoginResult.Error("Usuario no verificado o error de autenticación.")
+                }
+            } ?: LoginResult.Error("Error desconocido")
+        } catch (e: Exception) {
+            LoginResult.Error(e.message ?: "Error desconocido")
+        }
+    }
+
+    suspend fun loginWithGoogle(idToken: String): LoginResult = runCatching {
+        val credential = com.google.firebase.auth.GoogleAuthProvider.getCredential(idToken, null)
+        firebase.auth.signInWithCredential(credential).await()
     }.toLoginResult()
+
 
     suspend fun createAccount(email: String, password: String): AuthResult? {
         return firebase.auth.createUserWithEmailAndPassword(email, password).await()
@@ -37,13 +55,21 @@ class AuthenticationService @Inject constructor(private val firebase: FirebaseCl
         return firebase.auth.currentUser?.isEmailVerified ?: false
     }
 
-    private fun Result<AuthResult>.toLoginResult() = when (val result = getOrNull()) {
-        null -> LoginResult.Error
-        else -> {
-            val userId = result.user
-            checkNotNull(userId)
-            LoginResult.Success(result.user?.isEmailVerified ?: false)
+    private fun Result<AuthResult>.toLoginResult(): LoginResult {
+        val authResult = getOrNull()
+        val user = authResult?.user
+
+        return when {
+            authResult == null -> LoginResult.Error("Failed to authenticate.")
+            user == null -> LoginResult.Error("Authentication failed, no user data.")
+            else -> if (user.isEmailVerified) {
+                // Asegúrate de incluir el email del usuario aquí
+                LoginResult.Success(user.isEmailVerified, user.email ?: "No email")
+            } else {
+                LoginResult.Error("User is not verified or authentication failed.")
+            }
         }
     }
+
 
 }

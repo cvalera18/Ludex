@@ -5,7 +5,6 @@ plugins {
     id 'org.jetbrains.kotlin.android'
     id 'dagger.hilt.android.plugin'
     id 'kotlin-kapt'
-//    id 'com.google.gms.google-services'
     id 'androidx.navigation.safeargs.kotlin'
     id 'com.google.gms.google-services'
     id 'com.google.firebase.crashlytics'
@@ -28,6 +27,7 @@ android {
         // Set API keys in BuildConfig
         buildConfigField "String", "AUTHORIZATION_TOKEN", "\"${properties.getProperty("AUTHORIZATION_TOKEN")}\""
         buildConfigField "String", "CLIENT_ID", "\"${properties.getProperty("CLIENT_ID")}\""
+//        buildConfigField "String", "GOOGLE_ID_CLIENT", "\"${properties.getProperty("GOOGLE_ID_CLIENT")}\""
     }
 
     signingConfigs {
@@ -105,7 +105,10 @@ dependencies {
     implementation 'com.google.firebase:firebase-crashlytics'
     implementation 'com.google.firebase:firebase-analytics'
     implementation 'com.google.firebase:firebase-auth-ktx'
+    implementation 'com.google.android.gms:play-services-auth:21.1.1'
     implementation 'com.google.firebase:firebase-database-ktx'
+
+    implementation 'com.google.android.gms:play-services-auth:20.2.0'
     kapt "com.google.dagger:hilt-compiler:$hilt_version"
     kapt "androidx.room:room-compiler:$room_version"
 
