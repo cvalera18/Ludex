@@ -29,8 +29,4 @@ class FirebaseClient @Inject constructor() {
         false
     }
 
-    fun firebaseAuthWithGoogle(idToken: String?): Task<AuthResult> {
-        val credential = GoogleAuthProvider.getCredential(idToken, null)
-        return auth.signInWithCredential(credential)
-    }
 }

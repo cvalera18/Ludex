@@ -1,6 +1,5 @@
 package com.cvalera.ludex.data.network
 
-import android.widget.Toast
 import com.cvalera.ludex.data.response.LoginResult
 import com.google.firebase.auth.AuthResult
 import kotlinx.coroutines.delay
@@ -41,7 +40,7 @@ class AuthenticationService @Inject constructor(private val firebase: FirebaseCl
         firebase.auth.signInWithCredential(credential).await()
     }.toLoginResult()
 
-
+    fun getCurrentUser() = firebase.auth.currentUser
     suspend fun createAccount(email: String, password: String): AuthResult? {
         return firebase.auth.createUserWithEmailAndPassword(email, password).await()
     }
@@ -70,6 +69,4 @@ class AuthenticationService @Inject constructor(private val firebase: FirebaseCl
             }
         }
     }
-
-
 }

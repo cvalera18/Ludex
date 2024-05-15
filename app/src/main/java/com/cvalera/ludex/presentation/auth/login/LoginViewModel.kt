@@ -6,9 +6,9 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.cvalera.ludex.core.Event
-import com.cvalera.ludex.data.network.AuthenticationService
 import com.cvalera.ludex.data.network.FirebaseClient
 import com.cvalera.ludex.data.response.LoginResult
+import com.cvalera.ludex.domain.usecase.CreateGoogleUserUseCase
 import com.cvalera.ludex.domain.usecase.LoginUseCase
 import com.cvalera.ludex.domain.usecase.RecoverPasswordUseCase
 import com.cvalera.ludex.presentation.auth.login.model.UserLogin
@@ -23,7 +23,7 @@ class LoginViewModel @Inject constructor(
     val loginUseCase: LoginUseCase,
     private val recoverPasswordUseCase: RecoverPasswordUseCase,
     private val firebaseClient: FirebaseClient,
-    private val authenticationService: AuthenticationService
+    private val createGoogleUserUseCase: CreateGoogleUserUseCase
 ) : ViewModel() {
 
     private companion object {
@@ -90,8 +90,16 @@ class LoginViewModel @Inject constructor(
     fun authenticateWithGoogle(idToken: String?) {
         viewModelScope.launch {
             _viewState.value = _viewState.value.copy(isLoading = true)
-            val result = authenticationService.loginWithGoogle(idToken ?: "")
-            handleLoginResult(result)
+            idToken?.let {
+                val success = createGoogleUserUseCase(it)
+                if (success) {
+                    _viewState.value = _viewState.value.copy(isUserAuthenticated = true)
+                    _navigateToList.value = Event(true)
+                } else {
+                    _viewState.value =
+                        _viewState.value.copy(errorMessage = "Failed to authenticate with Google")
+                }
+            }
         }
     }
 
@@ -109,6 +117,7 @@ class LoginViewModel @Inject constructor(
                     _navigateToVerifyAccount.value = Event(true)
                 }
             }
+
             is LoginResult.Error -> {
                 _viewState.value = _viewState.value.copy(errorMessage = result.message)
                 _showErrorDialog.value = UserLogin(showErrorDialog = true)

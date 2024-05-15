@@ -25,6 +25,7 @@ import com.cvalera.ludex.presentation.auth.login.model.UserLogin
 import com.cvalera.ludex.presentation.auth.signin.SignInActivity
 import com.cvalera.ludex.presentation.auth.verification.VerificationActivity
 import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
 import dagger.hilt.android.AndroidEntryPoint
@@ -121,16 +122,10 @@ class LoginActivity : AppCompatActivity() {
             toast("Se accedió como anónimo")
         }
 
-        binding.viewBottom.cardGoogle.setOnClickListener{
-            val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                .requestIdToken(getString(R.string.default_web_client_id))
-                .requestEmail()
-                .build()
-
-            val googleSignInClient = GoogleSignIn.getClient(this, gso)
+        binding.viewBottom.cardGoogle.setOnClickListener {
+            val googleSignInClient = getGoogleSignInClient()
             val signInIntent = googleSignInClient.signInIntent
             googleSignInClient.signOut()
-
             startActivityForResult(signInIntent, RC_SIGN_IN)
         }
 
@@ -190,6 +185,13 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 
+    private fun getGoogleSignInClient(): GoogleSignInClient {
+        val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+            .requestIdToken(getString(R.string.default_web_client_id))
+            .requestEmail()
+            .build()
+        return GoogleSignIn.getClient(this, gso)
+    }
 
     private fun updateUI(viewState: LoginViewState) {
         binding.pbLoading.isVisible = viewState.isLoading
