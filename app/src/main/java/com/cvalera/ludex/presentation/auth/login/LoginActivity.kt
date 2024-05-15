@@ -88,47 +88,48 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun initListeners() {
-        binding.etEmail.loseFocusAfterAction(EditorInfo.IME_ACTION_NEXT)
-        binding.etEmail.onTextChanged { onFieldChanged() }
+        with(binding) {
+            etEmail.loseFocusAfterAction(EditorInfo.IME_ACTION_NEXT)
+            etEmail.onTextChanged { onFieldChanged() }
 
-        binding.etPassword.loseFocusAfterAction(EditorInfo.IME_ACTION_DONE)
-        binding.etPassword.setOnFocusChangeListener { _, hasFocus -> onFieldChanged(hasFocus) }
-        binding.etPassword.onTextChanged { onFieldChanged() }
+            etPassword.loseFocusAfterAction(EditorInfo.IME_ACTION_DONE)
+            etPassword.setOnFocusChangeListener { _, hasFocus -> onFieldChanged(hasFocus) }
+            etPassword.onTextChanged { onFieldChanged() }
 
 //        binding.tvForgotPassword.setOnClickListener { loginViewModel.onForgotPasswordSelected() }
 
-        binding.viewBottom.tvFooter.setOnClickListener { loginViewModel.onSignInSelected() }
+            viewBottom.tvFooter.setOnClickListener { loginViewModel.onSignInSelected() }
 
-        binding.btnLogin.setOnClickListener {
-            it.dismissKeyboard()
-            loginViewModel.onLoginSelected(
-                binding.etEmail.text.toString(),
-                binding.etPassword.text.toString()
-            )
-        }
+            btnLogin.setOnClickListener {
+                it.dismissKeyboard()
+                loginViewModel.onLoginSelected(
+                    binding.etEmail.text.toString(),
+                    binding.etPassword.text.toString()
+                )
+            }
 
-        binding.tvForgotPassword.setOnClickListener {
-            val email = binding.etEmail.text.toString()
-            if (email.isNotBlank()) {
-                loginViewModel.recoverPassword(email)
-            } else {
-                toast(getString(R.string.enter_email_message))
+            tvForgotPassword.setOnClickListener {
+                val email = binding.etEmail.text.toString()
+                if (email.isNotBlank()) {
+                    loginViewModel.recoverPassword(email)
+                } else {
+                    toast(getString(R.string.enter_email_message))
+                }
+            }
+
+            btnAnonymous.setOnClickListener {
+                loginViewModel.signInAnonymously()
+                // TODO Quitar este toast, es solo para probar.
+                toast("Se accedió como anónimo")
+            }
+
+            viewBottom.cardGoogle.setOnClickListener {
+                val googleSignInClient = getGoogleSignInClient()
+                val signInIntent = googleSignInClient.signInIntent
+                googleSignInClient.signOut()
+                startActivityForResult(signInIntent, RC_SIGN_IN)
             }
         }
-
-        binding.btnAnonymous.setOnClickListener {
-            loginViewModel.signInAnonymously()
-            // TODO Quitar este toast, es solo para probar.
-            toast("Se accedió como anónimo")
-        }
-
-        binding.viewBottom.cardGoogle.setOnClickListener {
-            val googleSignInClient = getGoogleSignInClient()
-            val signInIntent = googleSignInClient.signInIntent
-            googleSignInClient.signOut()
-            startActivityForResult(signInIntent, RC_SIGN_IN)
-        }
-
     }
 
     private fun initObservers() {

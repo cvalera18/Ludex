@@ -5,7 +5,9 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import com.cvalera.ludex.R
+import com.cvalera.ludex.core.ex.toast
 import com.cvalera.ludex.databinding.ActivityIntroductionBinding
+import com.cvalera.ludex.presentation.MainActivity
 import com.cvalera.ludex.presentation.auth.login.LoginActivity
 import com.cvalera.ludex.presentation.auth.signin.SignInActivity
 import dagger.hilt.android.AndroidEntryPoint
@@ -33,6 +35,11 @@ class IntroductionActivity : AppCompatActivity() {
         with(binding) {
             btnLogin.setOnClickListener { introductionViewModel.onLoginSelected() }
             btnSingIn.setOnClickListener { introductionViewModel.onSignInSelected() }
+            btnAnonymous.setOnClickListener {
+                introductionViewModel.signInAnonymously()
+                // TODO Quitar este toast, es solo para probar.
+                toast("Se accedió como anónimo")
+            }
         }
     }
 
@@ -48,8 +55,17 @@ class IntroductionActivity : AppCompatActivity() {
                 goToSingIn()
             }
         })
+        introductionViewModel.navigateToList.observe(this) {
+            it.getContentIfNotHandled()?.let {
+                goToList()
+            }
+        }
     }
 
+    private fun goToList() {
+        startActivity(MainActivity.create(this))
+        finish()
+    }
 
     private fun goToSingIn() {
         startActivity(SignInActivity.create(this))
