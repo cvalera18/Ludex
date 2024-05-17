@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.cvalera.ludex.data.network.UserService
 import com.cvalera.ludex.domain.model.Game
 import com.cvalera.ludex.domain.model.GameStatus
 import com.cvalera.ludex.domain.usecase.AddFavoriteGameUseCase
@@ -46,6 +47,7 @@ class ListViewModel @Inject constructor(
 
     init {
         handleSearch()
+//        fetchUserGames()
     }
 
     private fun handleSearch() {
@@ -58,6 +60,16 @@ class ListViewModel @Inject constructor(
             }
             .launchIn(viewModelScope)
     }
+//    private fun fetchUserGames() {
+//        viewModelScope.launch {
+//            _isLoading.value = true
+//            val games = userService.getUserGames()
+//            // Aquí deberías manejar la actualización de tu UI con los juegos obtenidos
+//            // Por ejemplo, actualizando un LiveData o StateFlow
+//            // this.allGames.value = games // Ejemplo, si `allGames` fuera un LiveData mutable
+//            _isLoading.value = false
+//        }
+//    }
 
     fun getListGames() {
         viewModelScope.launch {

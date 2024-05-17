@@ -1,11 +1,12 @@
 package com.cvalera.ludex.data.network
 
 import com.cvalera.ludex.domain.model.Game
+import com.cvalera.ludex.domain.model.GameStatus
 import com.cvalera.ludex.presentation.auth.signin.model.UserSignIn
 import kotlinx.coroutines.tasks.await
 import javax.inject.Inject
 
-class UserService @Inject constructor(private val firebase: FirebaseClient) {
+class UserService @Inject constructor(val firebase: FirebaseClient) {
 
     companion object {
         const val USERS_NODE = "users"
@@ -19,11 +20,9 @@ class UserService @Inject constructor(private val firebase: FirebaseClient) {
             "realname" to userSignIn.realName
         )
 
-        // Obtiene una nueva clave para un nuevo usuario
-        val userKey = firebase.db.child(USERS_NODE).push().key ?: throw Exception("Invalid key")
+        val userId = firebase.getCurrentUserId() ?: throw Exception("User not logged in")
 
-        // Establece los valores del usuario en la nueva clave
-        firebase.db.child(USERS_NODE).child(userKey).setValue(user).await()
+        firebase.db.child(USERS_NODE).child(userId).setValue(user).await()
 
         true
     }.getOrElse {
@@ -36,29 +35,65 @@ class UserService @Inject constructor(private val firebase: FirebaseClient) {
             "displayName" to (displayName ?: "Unknown")
         )
 
-        val userKey = firebase.db.child(USERS_NODE).push().key ?: throw Exception("Invalid key")
+        val userId = firebase.getCurrentUserId() ?: throw Exception("User not logged in")
 
-        firebase.db.child(USERS_NODE).child(userKey).setValue(user).await()
+        firebase.db.child(USERS_NODE).child(userId).setValue(user).await()
 
         true
     }.getOrElse {
         false
     }
 
-    // Método para guardar juegos del usuario
-    suspend fun saveUserGames(userId: String, games: List<Game>): Boolean = runCatching {
-        val gamesMap = games.associateBy { it.id.toString() }
-        firebase.db.child(USERS_NODE).child(userId).child(GAMES_NODE).setValue(gamesMap).await()
-        true
-    }.getOrElse {
-        false
-    }
+    suspend fun getUserGames(): List<Game> = runCatching {
+        val userId = firebase.getCurrentUserId() ?: throw Exception("User not logged in")
 
-    // Método para obtener juegos del usuario
-    suspend fun getUserGames(userId: String): List<Game> = runCatching {
         val snapshot = firebase.db.child(USERS_NODE).child(userId).child(GAMES_NODE).get().await()
         snapshot.children.mapNotNull { it.getValue(Game::class.java) }
     }.getOrElse {
         emptyList()
     }
+
+    suspend fun onFavUserGame(game: Game): Boolean = runCatching {
+        val userId = firebase.getCurrentUserId() ?: throw Exception("User not logged in")
+        val modGame = game.copy(fav = !game.fav, status = game.status)
+        firebase.db.child(USERS_NODE).child(userId).child(GAMES_NODE).child(modGame.id.toString())
+            .setValue(modGame).await()
+
+        true
+    }.getOrElse {
+        false
+    }
+
+    suspend fun unFavUserGame(game: Game): Boolean = runCatching {
+        val userId = firebase.getCurrentUserId() ?: throw Exception("User not logged in")
+        val modGame = game.copy(fav = !game.fav, status = game.status)
+/*      Only delete from remote database if dont have an status and fav is false */
+        if ((modGame.status == GameStatus.SIN_CLASIFICAR) && (!modGame.fav)) {
+            firebase.db.child(USERS_NODE).child(userId).child(GAMES_NODE).child(modGame.id.toString())
+                .removeValue().await()
+            } else {
+            firebase.db.child(USERS_NODE).child(userId).child(GAMES_NODE).child(modGame.id.toString())
+                .setValue(modGame).await()
+        }
+        true
+    }.getOrElse {
+        false
+    }
+
+    suspend fun updateGameStatusUserGame(game: Game, status: GameStatus): Boolean = runCatching {
+        val userId = firebase.getCurrentUserId() ?: throw Exception("User not logged in")
+        val modGame = game.copy(fav = game.fav, status = status)
+        /*      Only delete from remote database if dont have an status and fav is false */
+        if ((modGame.status == GameStatus.SIN_CLASIFICAR) && (!modGame.fav)) {
+            firebase.db.child(USERS_NODE).child(userId).child(GAMES_NODE).child(modGame.id.toString())
+                .removeValue().await()
+        } else {
+            firebase.db.child(USERS_NODE).child(userId).child(GAMES_NODE).child(modGame.id.toString())
+                .setValue(modGame).await()
+        }
+        true
+    }.getOrElse {
+        false
+    }
+
 }

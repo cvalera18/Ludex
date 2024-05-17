@@ -28,5 +28,7 @@ class FirebaseClient @Inject constructor() {
     }.getOrElse {
         false
     }
+    // Método para obtener el ID del usuario actual
+    fun getCurrentUserId(): String? = auth.currentUser?.uid
 
 }
