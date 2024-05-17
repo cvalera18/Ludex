@@ -4,7 +4,7 @@ import com.cvalera.ludex.data.datasource.local.LocalDataSource
 import com.cvalera.ludex.data.datasource.local.LocalDataSourceImpl
 import com.cvalera.ludex.data.datasource.local.database.dao.GameDao
 import com.cvalera.ludex.data.datasource.remote.GameRemoteDataSource
-import com.cvalera.ludex.data.datasource.remote.IGDBGameRemoteDataSource
+import com.cvalera.ludex.data.datasource.remote.IGDBJsonRemoteDataSource
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -17,7 +17,8 @@ import javax.inject.Singleton
 object DataModule {
 
     @Provides
-    fun provideGameRemoteDataSource(): GameRemoteDataSource = IGDBGameRemoteDataSource()
+    fun provideGameRemoteDataSource(): GameRemoteDataSource = IGDBJsonRemoteDataSource()
+//    fun provideGameRemoteDataSource(): GameRemoteDataSource = IGDBGameRemoteDataSource()
 
     @Provides
     @Singleton
