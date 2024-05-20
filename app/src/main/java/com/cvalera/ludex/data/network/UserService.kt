@@ -146,46 +146,4 @@ class UserService @Inject constructor(
         false
     }
 
-    suspend fun onFavUserGame(game: Game): Boolean = runCatching {
-        val userId = firebase.getCurrentUserId() ?: throw Exception("User not logged in")
-        val modGame = game.copy(fav = !game.fav, status = game.status)
-        firebase.db.child(USERS_NODE).child(userId).child(GAMES_NODE).child(modGame.id.toString())
-            .setValue(modGame).await()
-
-        true
-    }.getOrElse {
-        false
-    }
-
-    suspend fun unFavUserGame(game: Game): Boolean = runCatching {
-        val userId = firebase.getCurrentUserId() ?: throw Exception("User not logged in")
-        val modGame = game.copy(fav = !game.fav, status = game.status)
-        /*      Only delete from remote database if dont have an status and fav is false */
-        if ((modGame.status == GameStatus.SIN_CLASIFICAR) && (!modGame.fav)) {
-            firebase.db.child(USERS_NODE).child(userId).child(GAMES_NODE).child(modGame.id.toString())
-                .removeValue().await()
-        } else {
-            firebase.db.child(USERS_NODE).child(userId).child(GAMES_NODE).child(modGame.id.toString())
-                .setValue(modGame).await()
-        }
-        true
-    }.getOrElse {
-        false
-    }
-
-    suspend fun updateGameStatusUserGame(game: Game, status: GameStatus): Boolean = runCatching {
-        val userId = firebase.getCurrentUserId() ?: throw Exception("User not logged in")
-        val modGame = game.copy(fav = game.fav, status = status)
-        /*      Only delete from remote database if dont have an status and fav is false */
-        if ((modGame.status == GameStatus.SIN_CLASIFICAR) && (!modGame.fav)) {
-            firebase.db.child(USERS_NODE).child(userId).child(GAMES_NODE).child(modGame.id.toString())
-                .removeValue().await()
-        } else {
-            firebase.db.child(USERS_NODE).child(userId).child(GAMES_NODE).child(modGame.id.toString())
-                .setValue(modGame).await()
-        }
-        true
-    }.getOrElse {
-        false
-    }
 }

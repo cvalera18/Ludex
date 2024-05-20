@@ -40,8 +40,6 @@ class GameRepositoryImpl @Inject constructor(
             (currentList + combinedGames).distinctBy { it.id }
         }
 
-        // Actualizar la base de datos local con los datos combinados de Firebase
-        syncLocalWithFirebase()
     }
 
     override suspend fun searchGames(query: String) {
@@ -58,8 +56,6 @@ class GameRepositoryImpl @Inject constructor(
             }
         }
         lastQuery = query
-
-        // Compare with games in Firebase
     }
 
     override suspend fun syncLocalWithFirebase() {
@@ -97,8 +93,6 @@ class GameRepositoryImpl @Inject constructor(
         }
     }
 
-
-
     override suspend fun getFavoriteGames(): List<Game> {
         return localDataSource.getFavoriteGames()
     }
@@ -113,18 +107,12 @@ class GameRepositoryImpl @Inject constructor(
     override suspend fun unFavGame(game: Game) {
         localDataSource.unFavGame(game.id)
         // Remove the game from Firebase
-//        userService.unFavUserGame(game)
         userService.saveUserGame(game.copy(fav = false))
     }
-
     override suspend fun updateGameStatus(game: Game, status: GameStatus) {
         localDataSource.updateGameStatus(game, status)
-        // Save the game to Firebase
-//        userService.updateGameStatusUserGame(game, status)
         userService.saveUserGame(game.copy(status = status))
     }
-
-    // TODO FavViewModel needs to call this function
     override suspend fun getFavGamesByStatus(status: GameStatus): List<Game> {
         val filteredGames = getFavoriteGames()
             .filter { game ->
@@ -132,11 +120,9 @@ class GameRepositoryImpl @Inject constructor(
             }
         return filteredGames
     }
-
     override suspend fun getListedGames(excludedStatus: GameStatus): List<Game> {
         return localDataSource.getListedGames(excludedStatus)
     }
-
     override fun loadMoreGames() {
         remoteDataSource.nextPage()
     }
