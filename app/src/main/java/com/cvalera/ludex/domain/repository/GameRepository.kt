@@ -7,6 +7,7 @@ import kotlinx.coroutines.flow.Flow
 interface GameRepository {
 
     val allGames: Flow<List<Game>>
+//    suspend fun syncLocalWithFirebase()
     suspend fun getGames()
     suspend fun searchGames(query: String)
     suspend fun getFavoriteGames(): List<Game>
@@ -15,5 +16,6 @@ interface GameRepository {
     suspend fun getListedGames(excludedStatus: GameStatus): List<Game>
     suspend fun addFavoriteGame(game: Game)
     suspend fun unFavGame(game: Game)
+    suspend fun syncLocalWithFirebase()
     fun loadMoreGames()
 }

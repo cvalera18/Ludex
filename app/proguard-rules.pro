@@ -26,3 +26,6 @@
 -keepclassmembernames class com.google.protobuf.** {
     public static ** newBuilder();
 }
+-keepclassmembers class com.cvalera.ludex.domain.model.Game {
+    public <init>();
+}

@@ -50,4 +50,21 @@ class LocalDataSourceImpl @Inject constructor(
     override suspend fun getAllUserGames(): List<Game> = withContext(ioDispatcher) {
         gameDao.getAllUserGames().map { it.toDomainModel() }
     }
+
+    override suspend fun saveGames(games: List<Game>) = withContext(ioDispatcher) {
+        val entities = games.map { it.toEntityModel() }
+        gameDao.insertAll(entities)
+    }
+
+    override suspend fun saveGame(game: Game) = withContext(ioDispatcher) {
+        gameDao.insert(game.toEntityModel())
+    }
+
+    override suspend fun deleteGame(game: Game) = withContext(ioDispatcher) {
+        gameDao.delete(game.toEntityModel())
+    }
+    override suspend fun clearAllGames() = withContext(ioDispatcher) {
+        gameDao.clearAll()
+    }
+
 }

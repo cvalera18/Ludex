@@ -20,7 +20,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class LoginViewModel @Inject constructor(
-    val loginUseCase: LoginUseCase,
+    private val loginUseCase: LoginUseCase,
     private val recoverPasswordUseCase: RecoverPasswordUseCase,
     private val firebaseClient: FirebaseClient,
     private val createGoogleUserUseCase: CreateGoogleUserUseCase

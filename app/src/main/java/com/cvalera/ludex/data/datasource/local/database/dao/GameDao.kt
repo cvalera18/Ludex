@@ -1,6 +1,7 @@
 package com.cvalera.ludex.data.datasource.local.database.dao
 
 import androidx.room.Dao
+import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
@@ -33,6 +34,15 @@ interface GameDao {
 
     @Query("SELECT * FROM games_table WHERE status != :excludedStatus")
     suspend fun getListedGamesNotEqual(excludedStatus: String): List<GameEntity>
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertAll(games: List<GameEntity>)
+
+    @Query("DELETE FROM games_table")
+    suspend fun clearAll()
+
+    @Delete
+    suspend fun delete(game: GameEntity)
 
 }
 

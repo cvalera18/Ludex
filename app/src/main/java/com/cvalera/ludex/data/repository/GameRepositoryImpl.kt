@@ -8,10 +8,12 @@ import com.cvalera.ludex.data.network.UserService.Companion.USERS_NODE
 import com.cvalera.ludex.domain.model.Game
 import com.cvalera.ludex.domain.model.GameStatus
 import com.cvalera.ludex.domain.repository.GameRepository
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.getAndUpdate
 import kotlinx.coroutines.tasks.await
+import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 class GameRepositoryImpl @Inject constructor(
@@ -20,20 +22,26 @@ class GameRepositoryImpl @Inject constructor(
     private val userService: UserService
 ) : GameRepository {
     private var lastQuery: String = ""
-
     private val _remoteGames = MutableStateFlow<List<Game>>(emptyList())
-    override val allGames = combine(_remoteGames, localDataSource.allGames) { remote, local ->
-        mergeLists(remote, local)
+    override val allGames = combine(
+        _remoteGames,
+        localDataSource.allGames,
+        userService.userGames
+    ) { remote, local, firebase ->
+        mergeLists(remote, local, firebase)
     }
 
     override suspend fun getGames() {
         val remoteGames = remoteDataSource.fetchGames()
+        val userGames = userService.userGames.value
+        val combinedGames = mergeLists(remoteGames, localDataSource.getAllUserGames(), userGames)
+
         _remoteGames.getAndUpdate { currentList ->
-            (currentList + remoteGames).distinctBy { it.id }
+            (currentList + combinedGames).distinctBy { it.id }
         }
 
-        // Compare with games in Firebase
-
+        // Actualizar la base de datos local con los datos combinados de Firebase
+        syncLocalWithFirebase()
     }
 
     override suspend fun searchGames(query: String) {
@@ -51,20 +59,45 @@ class GameRepositoryImpl @Inject constructor(
         }
         lastQuery = query
 
-        // Save the games to Firebase
-        val userId = userService.firebase.getCurrentUserId() ?: return
-        userService.firebase.db.child(USERS_NODE).child(userId).child(GAMES_NODE)
-            .setValue(fetchedGames).await()
+        // Compare with games in Firebase
     }
 
-    private fun mergeLists(remoteGames: List<Game>, localGames: List<Game>): List<Game> {
+    override suspend fun syncLocalWithFirebase() {
+        val userGames = userService.getUserGamesFromFirebase()
+        userService.syncLocalDatabase(userGames)
+    }
+
+    private fun mergeLists(remoteGames: List<Game>, localGames: List<Game>, firebaseGames: List<Game>): List<Game> {
+        val firebaseGamesMap = firebaseGames.associateBy { it.id }
         val localGamesMap = localGames.associateBy { it.id }
+
         return remoteGames.map { remoteGame ->
-            localGamesMap[remoteGame.id]?.let { localGame ->
-                remoteGame.copy(fav = localGame.fav, status = localGame.status)
-            } ?: remoteGame
+            val firebaseGame = firebaseGamesMap[remoteGame.id]
+            val localGame = localGamesMap[remoteGame.id]
+
+            when {
+                firebaseGame != null -> {
+                    // Prioriza los valores de Firebase
+                    remoteGame.copy(
+                        fav = firebaseGame.fav,
+                        status = firebaseGame.status
+                    )
+                }
+                localGame != null -> {
+                    // Si no hay valores en Firebase, usa los locales
+                    remoteGame.copy(
+                        fav = localGame.fav,
+                        status = localGame.status
+                    )
+                }
+                else -> {
+                    remoteGame
+                }
+            }
         }
     }
+
+
 
     override suspend fun getFavoriteGames(): List<Game> {
         return localDataSource.getFavoriteGames()
@@ -73,19 +106,22 @@ class GameRepositoryImpl @Inject constructor(
     override suspend fun addFavoriteGame(game: Game) {
         localDataSource.addFavoriteGame(game)
         // Save the game to Firebase
-        userService.onFavUserGame(game)
+//        userService.onFavUserGame(game)
+        userService.saveUserGame(game.copy(fav = true))
     }
 
     override suspend fun unFavGame(game: Game) {
         localDataSource.unFavGame(game.id)
         // Remove the game from Firebase
-        userService.unFavUserGame(game)
+//        userService.unFavUserGame(game)
+        userService.saveUserGame(game.copy(fav = false))
     }
 
     override suspend fun updateGameStatus(game: Game, status: GameStatus) {
         localDataSource.updateGameStatus(game, status)
         // Save the game to Firebase
-        userService.updateGameStatusUserGame(game, status)
+//        userService.updateGameStatusUserGame(game, status)
+        userService.saveUserGame(game.copy(status = status))
     }
 
     // TODO FavViewModel needs to call this function

@@ -13,6 +13,7 @@ import com.cvalera.ludex.domain.usecase.GetGamesUseCaseFlow
 import com.cvalera.ludex.domain.usecase.LoadMoreGamesUseCase
 import com.cvalera.ludex.domain.usecase.RemoveFavoriteGameUseCase
 import com.cvalera.ludex.domain.usecase.SearchGamesUseCase
+import com.cvalera.ludex.domain.usecase.SyncLocalWithFirebaseUseCase
 import com.cvalera.ludex.domain.usecase.UpdateGameStatusUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -32,6 +33,7 @@ class ListViewModel @Inject constructor(
     private val removeFavoriteGameUseCase: RemoveFavoriteGameUseCase,
     private val updateGameStatusUseCase: UpdateGameStatusUseCase,
     private val loadMoreGamesUseCase: LoadMoreGamesUseCase,
+    private val syncLocalWithFirebaseUseCase: SyncLocalWithFirebaseUseCase,
     getAllGamesUseCase: GetGamesUseCaseFlow,
 ) : ViewModel() {
     private val _isLoading = MutableLiveData<Boolean>()
@@ -47,7 +49,13 @@ class ListViewModel @Inject constructor(
 
     init {
         handleSearch()
-//        fetchUserGames()
+        syncLocalWithFirebaseIfConnected()
+    }
+
+    private fun syncLocalWithFirebaseIfConnected() {
+        viewModelScope.launch {
+            syncLocalWithFirebaseUseCase()
+        }
     }
 
     private fun handleSearch() {
@@ -60,16 +68,6 @@ class ListViewModel @Inject constructor(
             }
             .launchIn(viewModelScope)
     }
-//    private fun fetchUserGames() {
-//        viewModelScope.launch {
-//            _isLoading.value = true
-//            val games = userService.getUserGames()
-//            // Aquí deberías manejar la actualización de tu UI con los juegos obtenidos
-//            // Por ejemplo, actualizando un LiveData o StateFlow
-//            // this.allGames.value = games // Ejemplo, si `allGames` fuera un LiveData mutable
-//            _isLoading.value = false
-//        }
-//    }
 
     fun getListGames() {
         viewModelScope.launch {

@@ -12,4 +12,8 @@ interface LocalDataSource {
     suspend fun getFavoriteGames(): List<Game>
     suspend fun getListedGames(excludedStatus: GameStatus): List<Game>
     suspend fun getAllUserGames(): List<Game>
+    suspend fun saveGames(games: List<Game>)
+    suspend fun saveGame(game: Game)
+    suspend fun deleteGame(game: Game)
+    suspend fun clearAllGames()
 }

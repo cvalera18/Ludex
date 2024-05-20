@@ -16,7 +16,12 @@ class CreateGoogleUserUseCase @Inject constructor(
             // Save the user in Firebase Realtime Database
             val user = authenticationService.getCurrentUser()
             return user?.let {
-                userService.createGoogleUser(it.email ?: "", it.displayName)
+                val userExists = userService.doesUserExist(it.uid)
+                if (!userExists) {
+                    userService.createGoogleUser(it.email ?: "", it.displayName)
+                } else {
+                    true // User already exists, login successful
+                }
             } ?: false
         }
         return false
