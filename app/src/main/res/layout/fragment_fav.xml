@@ -11,20 +11,6 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <EditText
-            android:id="@+id/etFilter"
-            android:layout_width="match_parent"
-            android:layout_height="48dp"
-            android:padding="8dp"
-            android:hint="@string/buscar"
-            android:imeOptions="actionDone"
-            android:textStyle="italic"
-            android:alpha="0.85"
-            android:drawableEnd="@drawable/baseline_search_white"
-            android:inputType="text"
-            android:maxLines="1"
-            android:singleLine="true" />
-
         <HorizontalScrollView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

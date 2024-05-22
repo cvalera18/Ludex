@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.core.view.GravityCompat
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
@@ -18,6 +19,7 @@ import com.cvalera.ludex.R
 import com.cvalera.ludex.databinding.FragmentListBinding
 import com.cvalera.ludex.domain.model.Game
 import com.cvalera.ludex.domain.model.GameStatus
+import com.cvalera.ludex.presentation.SharedViewModel
 import com.cvalera.ludex.presentation.adapter.GameListAdapter
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
@@ -28,6 +30,7 @@ class ListFragment : Fragment() {
     private val binding get() = _binding!!
     private lateinit var adapter: GameListAdapter
     private val viewModel: ListViewModel by viewModels()
+    private val sharedViewModel: SharedViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
@@ -43,7 +46,6 @@ class ListFragment : Fragment() {
         initRecyclerView()
         observeLoadingState()
         getListGames()
-        setupNavigationDrawer()
     }
 
     private fun observeLoadingState() {
@@ -67,37 +69,11 @@ class ListFragment : Fragment() {
     }
 
     private fun configFilter() {
-        binding.etFilter.addTextChangedListener { userFilter ->
-            viewModel.configFilter(userFilter.toString())
+        sharedViewModel.searchQuery.observe(viewLifecycleOwner) { query ->
+            viewModel.configFilter(query)
         }
     }
-    private fun setupNavigationDrawer() {
-        binding.imageView.setOnClickListener {
-            binding.drawerLayout.openDrawer(GravityCompat.START)
-        }
 
-        binding.navigationView.setNavigationItemSelectedListener { menuItem ->
-            when (menuItem.itemId) {
-                R.id.inbox_item -> {
-                    // Acción para Inbox
-                }
-                R.id.outbox_item -> {
-                    // Acción para Outbox
-                }
-                R.id.favourites_item -> {
-                    // Acción para Favoritos
-                }
-                R.id.label_one -> {
-                    // Acción para Label One
-                }
-                R.id.label_two -> {
-                    // Acción para Label Two
-                }
-            }
-            binding.drawerLayout.closeDrawer(GravityCompat.START)
-            true
-        }
-    }
 
     private fun initRecyclerView() {
         adapter = GameListAdapter(gameList = emptyList(),
@@ -151,4 +127,9 @@ class ListFragment : Fragment() {
         )
         findNavController().navigate(action)
     }
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
+
 }

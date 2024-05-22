@@ -9,6 +9,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.widget.addTextChangedListener
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
@@ -18,6 +19,7 @@ import com.cvalera.ludex.R
 import com.cvalera.ludex.presentation.adapter.GameListAdapter
 import com.cvalera.ludex.databinding.FragmentFavBinding
 import com.cvalera.ludex.domain.model.Game
+import com.cvalera.ludex.presentation.SharedViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -29,6 +31,7 @@ class FavFragment : Fragment() {
     private var isLoading = false
 
     private val viewModel: FavViewModel by viewModels()
+    private val sharedViewModel: SharedViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -78,8 +81,8 @@ class FavFragment : Fragment() {
     }
 
     private fun searchInList() {
-        binding.etFilter.addTextChangedListener { userSearch ->
-            viewModel.searchInList(userSearch.toString())
+        sharedViewModel.searchQuery.observe(viewLifecycleOwner) { query ->
+            viewModel.searchInList(query)
         }
     }
 
@@ -161,5 +164,10 @@ class FavFragment : Fragment() {
     private fun onListedItem(game: Game, status: GameStatus) {
         viewModel.updateGameStatus(game, status)
     }
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
+
 
 }

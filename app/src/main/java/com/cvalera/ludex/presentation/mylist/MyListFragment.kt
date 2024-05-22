@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.widget.addTextChangedListener
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
@@ -17,6 +18,7 @@ import com.cvalera.ludex.R
 import com.cvalera.ludex.presentation.adapter.GameListAdapter
 import com.cvalera.ludex.databinding.FragmentMyListBinding
 import com.cvalera.ludex.domain.model.Game
+import com.cvalera.ludex.presentation.SharedViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -26,6 +28,7 @@ class MyListFragment : Fragment() {
     private val binding get() = _binding!!
     private lateinit var adapter: GameListAdapter
     private val viewModel: MyListViewModel by viewModels()
+    private val sharedViewModel: SharedViewModel by activityViewModels()
     private var isLoading = false
 
     override fun onCreateView(
@@ -75,8 +78,8 @@ class MyListFragment : Fragment() {
     }
 
     private fun searchInList() {
-        binding.etFilter.addTextChangedListener { userSearch ->
-            viewModel.searchInList(userSearch.toString())
+        sharedViewModel.searchQuery.observe(viewLifecycleOwner) { query ->
+            viewModel.searchInList(query)
         }
     }
 
@@ -151,4 +154,9 @@ class MyListFragment : Fragment() {
         )
         findNavController().navigate(action)
     }
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
+
 }
