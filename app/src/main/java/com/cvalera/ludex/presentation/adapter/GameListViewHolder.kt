@@ -24,6 +24,7 @@ class GameListViewHolder(
     ) {
         currentPosition = position
         binding.tvGame.text = gameListModel.titulo
+        binding.tvResume.text = gameListModel.sinopsis
         binding.tvStatus.text = itemView.context.getString(gameListModel.status.stringResId)
 
         Glide.with(binding.ivGame.context).load(gameListModel.imagen).optionalFitCenter()

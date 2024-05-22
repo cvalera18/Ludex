@@ -4,18 +4,51 @@
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_weight="1"
+            android:layout_marginStart="10dp"
+            android:background="@color/primary_color" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingStart="8dp"
+            android:paddingEnd="8dp"
+            android:text="or login with"
+            android:textColor="@color/primary_color"
+            android:textSize="12sp" />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_weight="1"
+            android:layout_marginEnd="10dp"
+            android:background="@color/primary_color" />
+    </LinearLayout>
+
     <androidx.cardview.widget.CardView
         android:id="@+id/cardGoogle"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_marginBottom="16dp"
+        android:layout_marginTop="10dp"
         app:cardBackgroundColor="@color/md_theme_light_secondary"
         app:cardCornerRadius="8dp"
         app:layout_constraintBottom_toTopOf="@+id/viewDivider"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_chainStyle="spread"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout">
 
         <androidx.appcompat.widget.AppCompatImageView
             android:layout_width="wrap_content"
@@ -38,12 +71,11 @@
 
     <TextView
         android:id="@+id/tvFooter"
-        style="@style/CaptionText"
+        style="@style/TertiaryButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="40dp"
         android:text="¿Todavía no tienes cuenta? Regístrate"
-        android:textColor="@color/blue"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

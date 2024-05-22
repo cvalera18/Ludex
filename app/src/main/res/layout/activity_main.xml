@@ -28,6 +28,10 @@
             android:layout_gravity="bottom"
             app:layout_constraintTop_toBottomOf="@+id/frameContainer"
             app:layout_constraintBottom_toBottomOf="parent"
+            app:backgroundTint="@color/dark_gray"
+            app:itemTextColor="@color/primary_color"
+            app:itemIconTint="@color/primary_color"
+            app:itemRippleColor="@color/seed"
             app:menu="@menu/navegation_menu" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
