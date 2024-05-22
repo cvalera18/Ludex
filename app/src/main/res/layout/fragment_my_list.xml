@@ -23,6 +23,8 @@
                         style="@style/Widget.Material3.Chip.Filter"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        app:chipBackgroundColor="@color/primary_color"
+                        android:textColor="@color/dark_gray"
                         android:text="@string/playing"/>
 
                     <com.google.android.material.chip.Chip
@@ -30,6 +32,8 @@
                         style="@style/Widget.Material3.Chip.Filter"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        app:chipBackgroundColor="@color/primary_color"
+                        android:textColor="@color/dark_gray"
                         android:text="@string/pending"/>
 
                     <com.google.android.material.chip.Chip
@@ -37,6 +41,8 @@
                         style="@style/Widget.Material3.Chip.Filter"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        app:chipBackgroundColor="@color/primary_color"
+                        android:textColor="@color/dark_gray"
                         android:text="@string/completed"/>
 
                     <com.google.android.material.chip.Chip
@@ -44,6 +50,8 @@
                         style="@style/Widget.Material3.Chip.Filter"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        app:chipBackgroundColor="@color/primary_color"
+                        android:textColor="@color/dark_gray"
                         android:text="@string/abandoned"/>
 
                 </com.google.android.material.chip.ChipGroup>
