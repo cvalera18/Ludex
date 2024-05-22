@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.GravityCompat
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -13,6 +14,7 @@ import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.cvalera.ludex.R
 import com.cvalera.ludex.databinding.FragmentListBinding
 import com.cvalera.ludex.domain.model.Game
 import com.cvalera.ludex.domain.model.GameStatus
@@ -41,6 +43,7 @@ class ListFragment : Fragment() {
         initRecyclerView()
         observeLoadingState()
         getListGames()
+        setupNavigationDrawer()
     }
 
     private fun observeLoadingState() {
@@ -66,6 +69,33 @@ class ListFragment : Fragment() {
     private fun configFilter() {
         binding.etFilter.addTextChangedListener { userFilter ->
             viewModel.configFilter(userFilter.toString())
+        }
+    }
+    private fun setupNavigationDrawer() {
+        binding.imageView.setOnClickListener {
+            binding.drawerLayout.openDrawer(GravityCompat.START)
+        }
+
+        binding.navigationView.setNavigationItemSelectedListener { menuItem ->
+            when (menuItem.itemId) {
+                R.id.inbox_item -> {
+                    // Acción para Inbox
+                }
+                R.id.outbox_item -> {
+                    // Acción para Outbox
+                }
+                R.id.favourites_item -> {
+                    // Acción para Favoritos
+                }
+                R.id.label_one -> {
+                    // Acción para Label One
+                }
+                R.id.label_two -> {
+                    // Acción para Label Two
+                }
+            }
+            binding.drawerLayout.closeDrawer(GravityCompat.START)
+            true
         }
     }
 

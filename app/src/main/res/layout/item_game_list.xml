@@ -21,18 +21,13 @@
             android:id="@+id/statusCard"
             style="@style/Widget.Material3.CardView.Outlined"
             android:layout_width="wrap_content"
-            android:layout_height="44dp"
-            android:layout_marginTop="25dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="35dp"
             app:cardBackgroundColor="#00FFFFFF"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/materialCardView"
             app:layout_constraintTop_toTopOf="@+id/materialCardView"
             app:strokeColor="@color/primary_color_transparent_10">
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:padding="5dp">
 
                 <ImageView
                     android:id="@+id/ivCircle"
@@ -44,8 +39,6 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
 
 
         </com.google.android.material.card.MaterialCardView>
@@ -83,43 +76,32 @@
             android:id="@+id/favCardView"
             style="@style/Widget.Material3.CardView.Outlined"
             android:layout_width="wrap_content"
-            android:layout_height="44dp"
-            android:layout_marginTop="15dp"
+            android:layout_height="wrap_content"
             app:cardBackgroundColor="#00FFFFFF"
+            android:layout_marginBottom="35dp"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/materialCardView"
-            app:layout_constraintTop_toBottomOf="@+id/statusCard"
             app:strokeColor="@color/primary_color_transparent_10">
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:padding="5dp">
+            <ImageView
+                android:id="@+id/ivStar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:src="@drawable/baseline_star_outline_24" />
 
-                <ImageView
-                    android:id="@+id/ivStar"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentEnd="true"
-                    android:src="@drawable/baseline_star_outline_24"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <!--                <com.google.android.material.textview.MaterialTextView-->
-                <!--                    android:layout_width="wrap_content"-->
-                <!--                    android:layout_height="wrap_content"-->
-                <!--                    android:layout_marginStart="12dp"-->
-                <!--                    android:layout_marginEnd="2dp"-->
-                <!--                    android:text="@string/favorite"-->
-                <!--                    android:textColor="@color/primary_color"-->
-                <!--                    app:layout_constraintBottom_toBottomOf="parent"-->
-                <!--                    app:layout_constraintEnd_toEndOf="parent"-->
-                <!--                    app:layout_constraintStart_toEndOf="@+id/ivStar"-->
-                <!--                    app:layout_constraintTop_toTopOf="parent" />-->
-
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
+            <!--                <com.google.android.material.textview.MaterialTextView-->
+            <!--                    android:layout_width="wrap_content"-->
+            <!--                    android:layout_height="wrap_content"-->
+            <!--                    android:layout_marginStart="12dp"-->
+            <!--                    android:layout_marginEnd="2dp"-->
+            <!--                    android:text="@string/favorite"-->
+            <!--                    android:textColor="@color/primary_color"-->
+            <!--                    app:layout_constraintBottom_toBottomOf="parent"-->
+            <!--                    app:layout_constraintEnd_toEndOf="parent"-->
+            <!--                    app:layout_constraintStart_toEndOf="@+id/ivStar"-->
+            <!--                    app:layout_constraintTop_toTopOf="parent" />-->
 
 
         </com.google.android.material.card.MaterialCardView>
