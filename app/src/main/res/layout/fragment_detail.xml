@@ -16,6 +16,7 @@
         android:textAlignment="center"
         android:textSize="24sp"
         android:textStyle="bold"
+        android:textColor="@color/white"
         android:maxLines="2"
         android:ellipsize="end"
         app:layout_constraintEnd_toStartOf="@+id/ivStarDetail"
@@ -40,6 +41,7 @@
         android:singleLine="true"
         android:text="@string/platform"
         android:textSize="12sp"
+        android:textColor="@color/white"
         app:layout_constraintStart_toEndOf="@+id/ivGameDetail"
         app:layout_constraintTop_toBottomOf="@+id/tvGameName" />
 
@@ -51,6 +53,7 @@
         android:layout_marginTop="5dp"
         android:text="@string/state"
         android:textSize="12sp"
+        android:textColor="@color/white"
         app:layout_constraintStart_toStartOf="@+id/tvDev"
         app:layout_constraintTop_toBottomOf="@+id/tvDevSpec" />
 
@@ -112,6 +115,7 @@
         android:layout_marginStart="24dp"
         android:fontFamily="sans-serif-condensed-medium"
         android:text="Completado"
+        android:textColor="@color/white"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/ivGameDetail"
@@ -126,6 +130,7 @@
         android:layout_marginTop="5dp"
         android:text="@string/developer"
         android:textSize="12sp"
+        android:textColor="@color/white"
         app:layout_constraintStart_toStartOf="@+id/tvLaunchDate"
         app:layout_constraintTop_toBottomOf="@+id/tvLaunchDateSpec" />
 
@@ -136,6 +141,7 @@
         android:layout_marginStart="24dp"
         android:fontFamily="sans-serif-condensed-medium"
         android:text="Naughty Dog"
+        android:textColor="@color/white"
         android:textSize="20sp"
         android:maxLines="2"
         app:layout_constraintEnd_toEndOf="parent"
@@ -150,6 +156,7 @@
         android:text="@string/rel_date"
         android:layout_marginTop="5dp"
         android:textSize="12sp"
+        android:textColor="@color/white"
         app:layout_constraintStart_toStartOf="@+id/tvPlatformDetail"
         app:layout_constraintTop_toBottomOf="@+id/ivPlat5" />
 
@@ -161,6 +168,7 @@
         android:fontFamily="sans-serif-condensed-medium"
         android:text="02/09/2023"
         android:textSize="24sp"
+        android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/ivGameDetail"
         app:layout_constraintTop_toBottomOf="@+id/tvLaunchDate" />
@@ -172,6 +180,7 @@
         android:fontFamily="sans-serif-condensed-medium"
         android:text="@string/synopsis"
         android:textSize="12sp"
+        android:textColor="@color/white"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         app:layout_constraintStart_toStartOf="parent"
@@ -193,6 +202,7 @@
             android:layout_marginEnd="16dp"
             android:fontFamily="sans-serif-condensed-medium"
             android:padding="10dp"
+            android:textColor="@color/white"
             android:text="@string/tlou1sinopsis"
             android:textSize="18sp" />
     </ScrollView>

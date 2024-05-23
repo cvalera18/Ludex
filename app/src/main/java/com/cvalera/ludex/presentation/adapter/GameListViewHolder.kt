@@ -67,6 +67,7 @@ class GameListViewHolder(
         binding.favCardView.setOnClickListener {
             onClickStarListener.invoke(gameListModel)
         }
+
     }
 
 

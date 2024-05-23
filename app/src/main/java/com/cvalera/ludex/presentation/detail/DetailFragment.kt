@@ -1,5 +1,6 @@
 package com.cvalera.ludex.presentation.detail
 
+import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -9,12 +10,24 @@ import androidx.core.content.ContextCompat
 import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.cvalera.ludex.R
+import com.cvalera.ludex.core.util.PlatformLogos
 import com.cvalera.ludex.databinding.FragmentDetailBinding
 
 class DetailFragment : Fragment() {
 
     private val binding get() = _binding!!
     private var _binding: FragmentDetailBinding? = null
+
+    private var listener: OnDetailFragmentInteractionListener? = null
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        if (context is OnDetailFragmentInteractionListener) {
+            listener = context
+        } else {
+            throw RuntimeException("$context must implement OnDetailFragmentInteractionListener")
+        }
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -26,6 +39,7 @@ class DetailFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        listener?.onDetailFragmentOpened()
         initInfo()
         binding.ivBackArrow.setOnClickListener {
             findNavController().navigateUp()
@@ -33,7 +47,6 @@ class DetailFragment : Fragment() {
     }
 
     private fun initInfo() {
-        // Usa DetailFragmentArgs para recibir los argumentos correctamente
         val args = DetailFragmentArgs.fromBundle(requireArguments())
         val NAME = args.name
         val PLAT = args.plat
@@ -80,7 +93,12 @@ class DetailFragment : Fragment() {
         )
         platforms.forEachIndexed { index, platform ->
             platform?.let {
-                Glide.with(this).load(it).fitCenter().into(imageViews[index])
+                val logoResId = PlatformLogos.platformLogoMap[it]
+                if (logoResId != null) {
+                    imageViews[index].setImageResource(logoResId)
+                } else {
+                    Glide.with(this).load(it).fitCenter().into(imageViews[index])
+                }
             }
         }
     }
@@ -88,5 +106,6 @@ class DetailFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+        listener?.onDetailFragmentClosed()
     }
 }

@@ -2,16 +2,17 @@ package com.cvalera.ludex.presentation
 
 import android.content.Context
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import androidx.activity.viewModels
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
 import androidx.core.widget.addTextChangedListener
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import com.cvalera.ludex.R
 import com.cvalera.ludex.databinding.ActivityMainBinding
-import com.cvalera.ludex.presentation.auth.signin.SignInActivity
+import com.cvalera.ludex.presentation.detail.OnDetailFragmentInteractionListener
 import com.google.firebase.analytics.FirebaseAnalytics
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -19,7 +20,7 @@ enum class ProviderType {
     BASIC
 }
 @AndroidEntryPoint
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), OnDetailFragmentInteractionListener {
 
     companion object {
         fun create(context: Context): Intent =
@@ -52,7 +53,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun setupNavigationDrawer() {
         binding.ivUser.setOnClickListener {
-            binding.drawerLayout.openDrawer(GravityCompat.START)
+            binding.drawerLayout.openDrawer(GravityCompat.END)
         }
 
         binding.navigationView.setNavigationItemSelectedListener { menuItem ->
@@ -73,8 +74,19 @@ class MainActivity : AppCompatActivity() {
                     // Acción para Label Two
                 }
             }
-            binding.drawerLayout.closeDrawer(GravityCompat.START)
+            binding.drawerLayout.closeDrawer(GravityCompat.END)
             true
         }
+    }
+    override fun onDetailFragmentOpened() {
+        binding.navMenu.visibility = View.GONE
+        binding.etSearch.visibility = View.GONE
+        binding.ivUser.visibility = View.GONE
+    }
+
+    override fun onDetailFragmentClosed() {
+        binding.navMenu.visibility = View.VISIBLE
+        binding.etSearch.visibility = View.VISIBLE
+        binding.ivUser.visibility = View.VISIBLE
     }
 }
