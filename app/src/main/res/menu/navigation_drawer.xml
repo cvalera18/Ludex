@@ -4,41 +4,13 @@
 
     <item
         android:id="@+id/tvUser"
-        android:title="User">
+        android:title="Session">
         <menu>
             <item
-                android:id="@+id/inbox_item"
-                android:icon="@drawable/ic_anonymous"
-                android:title="Anónimo"
+                android:id="@+id/buttonLogOut"
+                android:icon="@drawable/ic_logout"
+                android:title="Log Out"
                 android:checkable="true"/>
-            <item
-                android:id="@+id/outbox_item"
-                android:icon="@drawable/baseline_email"
-                android:title="Email"
-                android:checkable="true"/>
-            <item
-                android:id="@+id/favourites_item"
-                android:icon="@drawable/baseline_star_outline_24"
-                android:title="Fav"
-                android:checkable="true"/>
-        </menu>
-    </item>
-    <item
-        android:id="@+id/labels_item"
-        android:title="Titulo">
-        <menu>
-            <item
-                android:id="@+id/label_one"
-                android:icon="@drawable/baseline_videogame_asset_24"
-                android:title="Control"
-                android:checkable="true"
-                app:showAsAction="ifRoom"/>
-            <item
-                android:id="@+id/label_two"
-                android:icon="@drawable/baseline_search_white"
-                android:title="Search"
-                android:checkable="true"
-                app:showAsAction="ifRoom"/>
         </menu>
     </item>
 </menu>

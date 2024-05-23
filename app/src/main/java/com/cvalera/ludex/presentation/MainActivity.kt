@@ -12,8 +12,10 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import com.cvalera.ludex.R
 import com.cvalera.ludex.databinding.ActivityMainBinding
+import com.cvalera.ludex.presentation.auth.intro.IntroductionActivity
 import com.cvalera.ludex.presentation.detail.OnDetailFragmentInteractionListener
 import com.google.firebase.analytics.FirebaseAnalytics
+import com.google.firebase.auth.FirebaseAuth
 import dagger.hilt.android.AndroidEntryPoint
 
 enum class ProviderType {
@@ -58,20 +60,9 @@ class MainActivity : AppCompatActivity(), OnDetailFragmentInteractionListener {
 
         binding.navigationView.setNavigationItemSelectedListener { menuItem ->
             when (menuItem.itemId) {
-                R.id.inbox_item -> {
-                    // Acción para Inbox
-                }
-                R.id.outbox_item -> {
-                    // Acción para Outbox
-                }
-                R.id.favourites_item -> {
-                    // Acción para Favoritos
-                }
-                R.id.label_one -> {
-                    // Acción para Label One
-                }
-                R.id.label_two -> {
-                    // Acción para Label Two
+                R.id.buttonLogOut -> {
+                    FirebaseAuth.getInstance().signOut()
+                    goToIntroActivity()
                 }
             }
             binding.drawerLayout.closeDrawer(GravityCompat.END)
@@ -89,4 +80,10 @@ class MainActivity : AppCompatActivity(), OnDetailFragmentInteractionListener {
         binding.etSearch.visibility = View.VISIBLE
         binding.ivUser.visibility = View.VISIBLE
     }
+    private fun goToIntroActivity() {
+        val intent = Intent(this, IntroductionActivity::class.java)
+        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+        startActivity(intent)
+    }
+
 }
