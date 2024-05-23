@@ -4,7 +4,7 @@
 
     <item
         android:id="@+id/tvUser"
-        android:title="Session">
+        android:title="User">
         <menu>
             <item
                 android:id="@+id/buttonLogOut"

@@ -35,7 +35,7 @@
                 android:layout_gravity="bottom"
                 app:backgroundTint="@color/dark_gray"
                 app:itemIconTint="@color/primary_color"
-                app:itemRippleColor="@color/seed"
+                app:itemRippleColor="@color/primary_color"
                 app:itemTextColor="@color/primary_color"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/frameContainer"
@@ -76,8 +76,9 @@
 
             <ImageView
                 android:id="@+id/ivUser"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginTop="10dp"
                 android:layout_marginEnd="16dp"
                 android:src="@drawable/baseline_account_circle"
                 app:layout_constraintBottom_toBottomOf="@+id/cardViewSearchBar"
@@ -93,6 +94,11 @@
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_gravity="end"
-        app:menu="@menu/navigation_drawer" />
+        android:background="@color/dark_gray_transparent10"
+        app:headerLayout="@layout/nav_header"
+        app:itemIconTint="@color/white"
+        app:itemTextColor="@color/white"
+        app:menu="@menu/navigation_drawer"
+        app:subheaderColor="@color/white" />
 
 </androidx.drawerlayout.widget.DrawerLayout>

@@ -27,16 +27,19 @@
             android:exported="false" />
         <activity
             android:name=".presentation.auth.intro.IntroductionActivity"
-            android:exported="true">
+            android:exported="false" />
+        <activity
+            android:name=".presentation.splash.SplashActivity"
+            android:exported="true"
+            android:theme="@style/SplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity> <!-- Main Activity -->
+        </activity>
         <activity
             android:name=".presentation.MainActivity"
-            android:exported="true" />
+            android:exported="false" />
 
         <meta-data
             android:name="preloaded_fonts"

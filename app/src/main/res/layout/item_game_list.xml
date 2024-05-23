@@ -27,7 +27,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/materialCardView"
             app:layout_constraintTop_toTopOf="@+id/materialCardView"
-            app:strokeColor="@color/primary_color_transparent_10">
+            app:strokeColor="@color/transparent">
 
                 <ImageView
                     android:id="@+id/ivCircle"
@@ -49,6 +49,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="12dp"
             android:layout_marginTop="10dp"
+            android:layout_marginEnd="8dp"
             android:text="The Last of Us Part 1"
             android:textColor="@color/primary_color"
             android:textSize="18sp"
@@ -61,12 +62,15 @@
             android:id="@+id/tvResume"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:paddingHorizontal="8dp"
+            android:paddingTop="5dp"
             android:text="This bundle contains the original version of Grand Theft Auto V, the standalone game Grand Theft Auto Online and the story mode add-on of Grand Theft Auto V."
             android:maxWidth="180dp"
             android:maxLines="4"
             android:ellipsize="end"
             android:textSize="12dp"
             android:textColor="@color/white"
+            android:justificationMode="none"
             app:layout_constraintBottom_toTopOf="@+id/tvStatus"
             app:layout_constraintEnd_toStartOf="@+id/materialCardView"
             app:layout_constraintStart_toEndOf="@+id/ivGame"
@@ -82,7 +86,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/materialCardView"
-            app:strokeColor="@color/primary_color_transparent_10">
+            app:strokeColor="@color/transparent">
 
             <ImageView
                 android:id="@+id/ivStar"
@@ -112,7 +116,7 @@
             android:textSize="16sp"
             android:textStyle="italic"
             android:layout_marginBottom="10dp"
-            android:layout_marginEnd="6dp"
+            android:layout_marginEnd="8dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/materialCardView" />
 

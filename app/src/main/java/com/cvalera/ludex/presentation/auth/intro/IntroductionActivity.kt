@@ -1,5 +1,7 @@
 package com.cvalera.ludex.presentation.auth.intro
 
+import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -18,6 +20,10 @@ class IntroductionActivity : AppCompatActivity() {
     private lateinit var binding: ActivityIntroductionBinding
     private val introductionViewModel: IntroductionViewModel by viewModels()
 
+    companion object {
+        fun create(context: Context): Intent =
+            Intent(context, IntroductionActivity::class.java)
+    }
     override fun onCreate(savedInstanceState: Bundle?) {
         setTheme(R.style.Theme_GameLista)
         super.onCreate(savedInstanceState)

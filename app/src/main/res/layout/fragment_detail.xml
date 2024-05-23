@@ -204,6 +204,7 @@
             android:padding="10dp"
             android:textColor="@color/white"
             android:text="@string/tlou1sinopsis"
+            android:justificationMode="inter_word"
             android:textSize="18sp" />
     </ScrollView>
 

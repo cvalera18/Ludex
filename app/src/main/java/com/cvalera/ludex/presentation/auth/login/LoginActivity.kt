@@ -37,10 +37,8 @@ class LoginActivity : AppCompatActivity() {
     companion object {
         fun create(context: Context): Intent =
             Intent(context, LoginActivity::class.java)
-
         private const val RC_SIGN_IN = 100
     }
-
     private lateinit var binding: ActivityLoginBinding
     private val loginViewModel: LoginViewModel by viewModels()
 
@@ -54,7 +52,6 @@ class LoginActivity : AppCompatActivity() {
 
         initUI()
     }
-
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
@@ -76,8 +73,6 @@ class LoginActivity : AppCompatActivity() {
             }
         }
     }
-
-
     private fun initUI() {
         initListeners()
         initObservers()
@@ -86,7 +81,6 @@ class LoginActivity : AppCompatActivity() {
             getString(R.string.login_footer_selected)
         )
     }
-
     private fun initListeners() {
         with(binding) {
             etEmail.loseFocusAfterAction(EditorInfo.IME_ACTION_NEXT)
@@ -116,7 +110,6 @@ class LoginActivity : AppCompatActivity() {
                     toast(getString(R.string.enter_email_message))
                 }
             }
-
             btnAnonymous.setOnClickListener {
                 loginViewModel.signInAnonymously()
                 // TODO Quitar este toast, es solo para probar.
@@ -131,7 +124,6 @@ class LoginActivity : AppCompatActivity() {
             }
         }
     }
-
     private fun initObservers() {
         // Observadores para la navegación y eventos específicos
         loginViewModel.navigateToList.observe(this) {
@@ -210,8 +202,6 @@ class LoginActivity : AppCompatActivity() {
             )
         }
     }
-
-
     private fun showErrorDialog(userLogin: UserLogin) {
         ErrorDialog.create(
             title = getString(R.string.login_error_dialog_title),

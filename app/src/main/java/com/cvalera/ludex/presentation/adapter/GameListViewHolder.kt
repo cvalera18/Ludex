@@ -32,6 +32,25 @@ class GameListViewHolder(
         itemView.setOnClickListener { onClickListener(gameListModel) }
         binding.statusCard.setOnClickListener { showPopup(gameListModel, onAddToListListener) }
 
+        updateIcon(gameListModel)
+
+        //Listener de la estrella
+        binding.favCardView.setOnClickListener {
+            onClickStarListener.invoke(gameListModel)
+        }
+
+        // Ajustar dinámicamente el número de líneas de tvResume
+        binding.tvGame.viewTreeObserver.addOnGlobalLayoutListener {
+            val lines = binding.tvGame.lineCount
+            if (lines > 2) {
+                binding.tvResume.maxLines = 2 // Ajusta el número máximo de líneas del tvResume
+            } else {
+                binding.tvResume.maxLines = 4 // Establece el valor original
+            }
+        }
+    }
+
+    private fun updateIcon(gameListModel: Game) {
         if (gameListModel.status != GameStatus.SIN_CLASIFICAR) {
             binding.ivCircle.setImageDrawable(
                 ContextCompat.getDrawable(
@@ -63,11 +82,6 @@ class GameListViewHolder(
                 )
             )
         }
-        //Listener de la estrella
-        binding.favCardView.setOnClickListener {
-            onClickStarListener.invoke(gameListModel)
-        }
-
     }
 
 
