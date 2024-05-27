@@ -7,6 +7,8 @@ class SearchGamesUseCase @Inject constructor(
     private val gameRepository: GameRepository
 ) {
     suspend operator fun invoke(query: String) {
+        if (query.isBlank()) return
         gameRepository.searchGames(query)
     }
 }
+

@@ -8,7 +8,6 @@ import kotlinx.coroutines.test.runTest
 import org.junit.Before
 import org.junit.Test
 
-@ExperimentalCoroutinesApi
 class GetGamesUseCaseTest {
     private lateinit var getGamesUseCase: GetGamesUseCase
     private lateinit var gameRepository: GameRepository

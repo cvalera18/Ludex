@@ -7,5 +7,7 @@ import javax.inject.Inject
 class RemoveFavoriteGameUseCase @Inject constructor(
     private val gameRepository: GameRepository
 ) {
-    suspend operator fun invoke(game: Game) = gameRepository.unFavGame(game)
+    suspend operator fun invoke(game: Game) {
+        gameRepository.unFavGame(game)
+    }
 }
