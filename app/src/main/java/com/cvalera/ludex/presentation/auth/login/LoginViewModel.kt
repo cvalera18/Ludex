@@ -11,6 +11,7 @@ import com.cvalera.ludex.data.response.LoginResult
 import com.cvalera.ludex.domain.usecase.CreateGoogleUserUseCase
 import com.cvalera.ludex.domain.usecase.LoginUseCase
 import com.cvalera.ludex.domain.usecase.RecoverPasswordUseCase
+import com.cvalera.ludex.domain.usecase.SignInAnonymouslyUseCase
 import com.cvalera.ludex.presentation.auth.login.model.UserLogin
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -22,7 +23,7 @@ import javax.inject.Inject
 class LoginViewModel @Inject constructor(
     private val loginUseCase: LoginUseCase,
     private val recoverPasswordUseCase: RecoverPasswordUseCase,
-    private val firebaseClient: FirebaseClient,
+    private val signInAnonymouslyUseCase: SignInAnonymouslyUseCase,
     private val createGoogleUserUseCase: CreateGoogleUserUseCase
 ) : ViewModel() {
 
@@ -75,8 +76,8 @@ class LoginViewModel @Inject constructor(
 
     fun signInAnonymously() {
         viewModelScope.launch {
-            val result = firebaseClient.signInAnonymously()
-            _navigateToList.value = Event(result != null)
+            val result = signInAnonymouslyUseCase()
+            _navigateToList.value = Event(result)
         }
     }
 

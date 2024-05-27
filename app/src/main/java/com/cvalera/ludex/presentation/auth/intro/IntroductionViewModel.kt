@@ -6,13 +6,14 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.cvalera.ludex.core.Event
 import com.cvalera.ludex.data.network.FirebaseClient
+import com.cvalera.ludex.domain.usecase.SignInAnonymouslyUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class IntroductionViewModel @Inject constructor(
-    private val firebaseClient: FirebaseClient
+    private val signInAnonymouslyUseCase: SignInAnonymouslyUseCase
 ) : ViewModel() {
 
     private val _navigateToList = MutableLiveData<Event<Boolean>>()
@@ -37,8 +38,8 @@ class IntroductionViewModel @Inject constructor(
 
     fun signInAnonymously() {
         viewModelScope.launch {
-            val result = firebaseClient.signInAnonymously()
-            _navigateToList.value = Event(result != null)
+            val result = signInAnonymouslyUseCase()
+            _navigateToList.value = Event(result)
         }
     }
 }
