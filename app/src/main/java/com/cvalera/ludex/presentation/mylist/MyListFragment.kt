@@ -3,6 +3,7 @@ package com.cvalera.ludex.presentation.mylist
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -58,6 +59,7 @@ class MyListFragment : Fragment() {
 
     private fun observeMyGameList() {
         viewModel.listedGameList.observe(viewLifecycleOwner) { listedGameList ->
+            Log.d("MyListFragment", "Game list updated: $listedGameList")
             adapter.updateGames(listedGameList)
         }
     }

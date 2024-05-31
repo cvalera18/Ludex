@@ -93,7 +93,13 @@ class IGDBJsonRemoteDataSource @Inject constructor() : GameRemoteDataSource {
     }
 
     private fun imageIconBuilder(imageIDs: List<String>): List<String> {
-        return imageIDs.map { com.api.igdb.utils.imageBuilder(it, ImageSize.COVER_SMALL, ImageType.PNG) }
+        return imageIDs.map {
+            com.api.igdb.utils.imageBuilder(
+                it,
+                ImageSize.COVER_SMALL,
+                ImageType.PNG
+            )
+        }
     }
 
     override fun nextPage() {

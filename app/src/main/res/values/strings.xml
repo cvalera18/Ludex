@@ -64,4 +64,5 @@
     <string name="error">Error</string>
     <string name="ok">Ok</string>
     <string name="default_web_client_id">993686722819-5tlf50lkhq8khatufi2rq4il3fsdvsn7.apps.googleusercontent.com</string>
+<!--    <string name="default_web_client_id">993686722819-95m8ukq49f41hrsr33lqq28cb5ev63hj.apps.googleusercontent.com</string>-->
 </resources>

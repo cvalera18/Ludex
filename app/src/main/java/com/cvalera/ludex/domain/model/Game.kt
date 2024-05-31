@@ -1,16 +1,19 @@
 package com.cvalera.ludex.domain.model
 
+import com.google.firebase.database.IgnoreExtraProperties
+import com.google.firebase.database.PropertyName
+
+@IgnoreExtraProperties
 data class Game(
-    val id: Long = 0L,
-    val titulo: String = "",
-    val imagen: String = "",
-    val plataforma: List<String> = emptyList(),
-    val status: GameStatus = GameStatus.SIN_CLASIFICAR,
-    val fav: Boolean = false,
-    val sinopsis: String = "",
-    val dev: String? = null,
-    val releaseDate: String? = null
+    @PropertyName("id") val id: Long = 0L,
+    @PropertyName("titulo") val titulo: String = "",
+    @PropertyName("imagen") val imagen: String = "",
+    @PropertyName("plataforma") val plataforma: List<String> = emptyList(),
+    @PropertyName("status") val status: GameStatus = GameStatus.SIN_CLASIFICAR,
+    @PropertyName("fav") val fav: Boolean = false,
+    @PropertyName("sinopsis") val sinopsis: String = "",
+    @PropertyName("dev") val dev: String? = null,
+    @PropertyName("releaseDate") val releaseDate: String? = null
 ) {
-    // Constructor sin argumentos
     constructor() : this(0L, "", "", emptyList(), GameStatus.SIN_CLASIFICAR, false, "", null, null)
 }

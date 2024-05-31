@@ -1,6 +1,7 @@
 package com.cvalera.ludex.presentation.list
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -59,6 +60,7 @@ class ListFragment : Fragment() {
         viewLifecycleOwner.lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.allGames.collect { gameList ->
+                    Log.d("ListFragment", "Game list updated: $gameList")
                     adapter.updateGames(gameList)
                 }
             }
@@ -89,7 +91,6 @@ class ListFragment : Fragment() {
                 val pastVisibleItem: Int = llmanager.findLastCompletelyVisibleItemPosition()
                 val total = adapter.itemCount
                 if (visibleItemCount + pastVisibleItem >= total) {
-                    observeLoadingState()
                     viewModel.loadMoreGames()
                     getListGames()
                 }
@@ -125,9 +126,5 @@ class ListFragment : Fragment() {
         findNavController().navigate(action)
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
-    }
 
 }

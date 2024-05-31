@@ -22,10 +22,6 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import dagger.hilt.android.AndroidEntryPoint
 
-enum class ProviderType {
-    BASIC
-}
-
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity(), OnDetailFragmentInteractionListener {
 
