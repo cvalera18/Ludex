@@ -11,6 +11,15 @@ plugins {
 }
 apply plugin: 'kotlin-kapt'
 android.buildFeatures.buildConfig true
+
+def secrets = new Properties()
+file("secrets.properties").withInputStream { secrets.load(it) }
+
+def RELEASE_STORE_FILE = secrets.getProperty("RELEASE_STORE_FILE")
+def RELEASE_STORE_PASSWORD = secrets.getProperty("RELEASE_STORE_PASSWORD")
+def RELEASE_KEY_ALIAS = secrets.getProperty("RELEASE_KEY_ALIAS")
+def RELEASE_KEY_PASSWORD = secrets.getProperty("RELEASE_KEY_PASSWORD")
+
 android {
     namespace 'com.cvalera.ludex'
     compileSdk 34
@@ -27,7 +36,10 @@ android {
         // Set API keys in BuildConfig
         buildConfigField "String", "AUTHORIZATION_TOKEN", "\"${properties.getProperty("AUTHORIZATION_TOKEN")}\""
         buildConfigField "String", "CLIENT_ID", "\"${properties.getProperty("CLIENT_ID")}\""
-//        buildConfigField "String", "GOOGLE_ID_CLIENT", "\"${properties.getProperty("GOOGLE_ID_CLIENT")}\""
+        buildConfigField "String", "RELEASE_STORE_FILE", "\"${RELEASE_STORE_FILE}\""
+        buildConfigField "String", "RELEASE_STORE_PASSWORD", "\"${RELEASE_STORE_PASSWORD}\""
+        buildConfigField "String", "RELEASE_KEY_ALIAS", "\"${RELEASE_KEY_ALIAS}\""
+        buildConfigField "String", "RELEASE_KEY_PASSWORD", "\"${RELEASE_KEY_PASSWORD}\""
     }
 
     signingConfigs {
