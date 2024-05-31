@@ -53,7 +53,7 @@
         <item name="textAllCaps">true</item>
         <item name="android:insetTop">0dp</item>
         <item name="android:insetBottom">0dp</item>
-        <item name="android:textColor">@color/dark_gray</item>
+        <item name="android:textColor">@color/white</item>
         <item name="android:gravity">center</item>
         <item name="backgroundTint">@color/primary_color</item>
     </style>
@@ -64,9 +64,9 @@
         <item name="textAllCaps">true</item>
         <item name="android:insetTop">0dp</item>
         <item name="android:insetBottom">0dp</item>
-        <item name="android:textColor">@color/primary_color</item>
+        <item name="android:textColor">@color/white</item>
         <item name="android:gravity">center</item>
-        <item name="iconTint">@color/primary_color</item>
+        <item name="iconTint">@color/white</item>
     </style>
 
     <style name="TertiaryButton" parent="Widget.AppCompat.TextView">

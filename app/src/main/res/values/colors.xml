@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- Nuevos colores -->
-    <color name="dark_gray">#1E1E1E</color>
-    <color name="dark_gray_transparent10">#F21E1E1E</color>
+    <color name="dark_gray">#262835</color>
+    <color name="dark_gray_transparent10">#F2262835</color>
     <color name="dark_purple">#08000D</color>
-    <color name="primary_color">#F3B919</color>
-    <color name="primary_color_transparent_10">#19F3B919</color>
+    <color name="primary_color">#474DA5</color>
+    <color name="primary_color_transparent_10">#1A474DA5</color>
     <color name="transparent">#00FFFFFF</color>
     <color name="white">#FFFFFF</color>
     <color name="black">#000000</color>

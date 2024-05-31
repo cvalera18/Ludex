@@ -11,7 +11,7 @@
     </style>
 
     <style name="CardViewRoundedRightCorners">
-        <item name="cardBackgroundColor">@color/primary_color_transparent_10</item>
+        <item name="cardBackgroundColor">#99474DA5</item>
         <item name="strokeColor">@color/primary_color_transparent_10</item>
         <item name="cardCornerRadius">0dp</item>
         <item name="android:padding">16dp</item>

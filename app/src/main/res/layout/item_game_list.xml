@@ -11,37 +11,11 @@
     android:focusable="true"
     app:cardCornerRadius="25dp"
     android:layout_margin="10dp"
-    android:backgroundTint="#19000000">
+    android:backgroundTint="#80000000">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-
-        <com.google.android.material.card.MaterialCardView
-            android:id="@+id/statusCard"
-            style="@style/Widget.Material3.CardView.Outlined"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="25dp"
-            app:cardBackgroundColor="#00FFFFFF"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/materialCardView"
-            app:layout_constraintTop_toTopOf="@+id/materialCardView"
-            app:strokeColor="@color/transparent">
-
-                <ImageView
-                    android:id="@+id/ivCircle"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentEnd="true"
-                    android:src="@drawable/bx_circle"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-
-
-        </com.google.android.material.card.MaterialCardView>
 
         <TextView
             android:id="@+id/tvGame"
@@ -51,7 +25,7 @@
             android:layout_marginTop="10dp"
             android:layout_marginEnd="8dp"
             android:text="The Last of Us Part 1"
-            android:textColor="@color/primary_color"
+            android:textColor="@color/white"
             android:textSize="18sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toStartOf="@+id/materialCardView"
@@ -75,6 +49,43 @@
             app:layout_constraintEnd_toStartOf="@+id/materialCardView"
             app:layout_constraintStart_toEndOf="@+id/ivGame"
             app:layout_constraintTop_toBottomOf="@+id/tvGame" />
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/materialCardView"
+            style="@style/CardViewRoundedRightCorners"
+            android:layout_width="80dp"
+            android:layout_height="150dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/statusCard"
+            style="@style/Widget.Material3.CardView.Outlined"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="25dp"
+            app:cardBackgroundColor="#00FFFFFF"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/materialCardView"
+            app:layout_constraintTop_toTopOf="@+id/materialCardView"
+            app:strokeColor="@color/transparent">
+
+            <ImageView
+                android:id="@+id/ivCircle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:src="@drawable/bx_circle"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+
+        </com.google.android.material.card.MaterialCardView>
 
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/favCardView"
@@ -112,7 +123,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/unclassified"
-            android:textColor="@color/primary_color"
+            android:textColor="@color/white"
             android:textSize="16sp"
             android:textStyle="italic"
             android:layout_marginBottom="10dp"
@@ -120,16 +131,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/materialCardView" />
 
-        <com.google.android.material.card.MaterialCardView
-            android:id="@+id/materialCardView"
-            style="@style/CardViewRoundedRightCorners"
-            android:layout_width="80dp"
-            android:layout_height="150dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
 
-        </com.google.android.material.card.MaterialCardView>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
