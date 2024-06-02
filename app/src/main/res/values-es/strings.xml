@@ -27,6 +27,14 @@
     <string name="status_tried">Probado</string>
 
 
+    <!--    Sign in form-->
+    <string name="nickname">Nombre público de usuario</string>
+    <string name="full_name">Nombre completo</string>
+    <string name="email">Correo electrónico</string>
+    <string name="password">Contraseña</string>
+    <string name="confirm_password">Confirmar contraseña</string>
+    <string name="create_account">Crear Cuenta</string>
+
     <string name="login_footer_unselected">¿Todavía no tienes cuenta?</string>
     <string name="login_footer_selected">Regístrate</string>
     <string name="login_error_mail">El email no es válido</string>
@@ -62,4 +70,21 @@
     <string name="enter_email_message">Enter email</string>
     <string name="error">Error</string>
     <string name="ok">Ok</string>
+    <!--    Bottom    -->
+    <string name="or_login_with">o inicia sesión con</string>
+    <string name="sign_up_text_button">¿Todavía no tienes cuenta? Regístrate</string>
+
+    <!--    Auth    -->
+    <string name="log_in">Iniciar Sesión</string>
+    <string name="log_in_anonymously">Ingresar como Incógnito</string>
+
+    <string name="e_mail">E-mail</string>
+    <string name="forget_password">¿Olvidaste tu contraseña?</string>
+    <string name="continue_text">Continuar</string>
+
+    <string name="welcome">Bienvenido</string>
+    <string name="succes_new_account">!Su cuenta se ha creado con éxito!</string>
+    <string name="user">Usuario</string>
+    <string name="log_out">Cerrar sesión</string>
+
 </resources>

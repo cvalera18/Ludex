@@ -33,7 +33,7 @@ fun Activity.span(
 
     completedText.apply {
         setSpan(
-            ForegroundColorSpan(ContextCompat.getColor(context, R.color.seed)),
+            ForegroundColorSpan(ContextCompat.getColor(context, R.color.primary_color)),
             unselectedPart.length,
             (unselectedPart + selectedPart).length + 1,
             Spannable.SPAN_EXCLUSIVE_EXCLUSIVE

@@ -34,9 +34,10 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="bottom"
                 app:backgroundTint="@color/dark_gray"
-                app:itemIconTint="@color/primary_color"
+                app:itemIconTint="@color/selector_nav_item_icon_color"
+                android:pointerIcon="zoom_in"
                 app:itemRippleColor="@color/primary_color"
-                app:itemTextColor="@color/primary_color"
+                app:itemTextColor="@color/white"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/frameContainer"
                 app:menu="@menu/navegation_menu" />

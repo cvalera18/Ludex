@@ -1,15 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
         android:id="@+id/tvUser"
-        android:title="User">
+        android:title="">
         <menu>
             <item
                 android:id="@+id/buttonLogOut"
                 android:icon="@drawable/ic_logout"
-                android:title="Log Out"
+                android:title="@string/log_out"
                 android:checkable="true"/>
         </menu>
     </item>

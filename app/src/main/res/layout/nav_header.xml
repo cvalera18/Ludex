@@ -16,7 +16,7 @@
         android:id="@+id/tvUserName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="User Name"
+        android:text=":User Name"
         android:textSize="18sp"
         android:textStyle="bold"
         android:textColor="@android:color/black"
@@ -26,7 +26,7 @@
         android:id="@+id/tvUserEmail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="User Email"
+        android:text=":User Email"
         android:textSize="14sp"
         android:textStyle="bold"
         android:textColor="@android:color/black"/>
