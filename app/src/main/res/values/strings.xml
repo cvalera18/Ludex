@@ -89,6 +89,7 @@
     <string name="succes_new_account">Your account has been successfully created!</string>
     <string name="user">User</string>
     <string name="log_out">Log Out</string>
+    <string name="status_circle">Status Circle</string>
 
 
 </resources>

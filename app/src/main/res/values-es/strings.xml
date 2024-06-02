@@ -86,5 +86,6 @@
     <string name="succes_new_account">!Su cuenta se ha creado con éxito!</string>
     <string name="user">Usuario</string>
     <string name="log_out">Cerrar sesión</string>
+    <string name="status_circle">Círculo de Estado</string>
 
 </resources>
