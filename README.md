@@ -1,15 +1,15 @@
+![Android](https://img.shields.io/badge/Android-3DDC84?style=for-the-badge&logo=android&logoColor=white) ![Kotlin](https://img.shields.io/badge/kotlin-%237F52FF.svg?style=for-the-badge&logo=kotlin&logoColor=white) ![Firebase](https://img.shields.io/badge/firebase-%23039BE5.svg?style=for-the-badge&logo=firebase)
 # Ludex
-
 ## Descripción
 Ludex es una aplicación Android desarrollada utilizando Kotlin que permite a los usuarios gestionar una lista de juegos, marcándolos como favoritos, actualizando su estado y buscando títulos específicos. Este proyecto implementa Clean Architecture y utiliza MVVM para el diseño de la arquitectura de la interfaz de usuario. Además, incorpora Room para la persistencia de datos local, Firebase Realtime Database para la persistencia de datos remota, Hilt para la inyección de dependencias y Firebase Auth para gestión de usuarios.
 
 ## Características
-- **Gestión de juegos:** Clasificar tus juegos favoritos por estado tales como: "Pendiente", Completado", "Jugando", "Abandonado", etc.
-- **Favoritos:** Marcar juegos como favoritos para un acceso rápido.
-- **Búsqueda de juegos:** Filtrar juegos por título.
-- **Persistencia de datos local:** Permite al usuario consultar sus listas sin conexióon a internet.
-- **Persistencia de datos remota:** Guarda tus listas de juegos en la nube asignados a tu usuario.
-- **Diseño responsivo:** Interfaz adaptada a diferentes tamaños de pantalla y orientaciones.
+- 🎮 **Gestión de juegos:** Clasificar tus juegos favoritos por estado tales como: "Pendiente", Completado", "Jugando", "Abandonado", etc.
+- ⭐ **Favoritos:** Marcar juegos como favoritos para un acceso rápido.
+- 🔎 **Búsqueda de juegos:** Filtrar juegos por título.
+- 📦 **Persistencia de datos local:** Permite al usuario consultar sus listas sin conexióon a internet.
+- ☁️ **Persistencia de datos remota:** Guarda tus listas de juegos en la nube asignados a tu usuario.
+- 🎨 **Diseño responsivo:** Interfaz adaptada a diferentes tamaños de pantalla y orientaciones.
 
 ## Capturas de Pantalla
 ![Google Pixel 4 XL (3) (1)](https://github.com/cvalera18/Ludex/assets/57680708/4c20495b-d76f-493e-85c4-dfecd47dbb45) ![Google Pixel 4 XL (2)](https://github.com/cvalera18/Ludex/assets/57680708/62fdfd11-9ea1-4798-9556-a4541b8cc2d5) ![Google Pixel 4 XL (4)](https://github.com/cvalera18/Ludex/assets/57680708/313f30bb-219e-4b1f-8fc0-d1413bfaca47) ![Google Pixel 4 XL (3) (2)](https://github.com/cvalera18/Ludex/assets/57680708/8cbf15d9-b090-479f-a48f-46dd94c6bc87)
@@ -19,10 +19,10 @@ Ludex es una aplicación Android desarrollada utilizando Kotlin que permite a lo
 - **Arquitectura de la Aplicación:** Clean Architecture, MVVM
 - **Gestión de Dependencias:** Hilt
 - **Base de Datos Local:** Room
-- **Respaldo en la Nube:** ![Firebase](https://img.shields.io/badge/firebase-%23039BE5.svg?style=for-the-badge&logo=firebase) Realtime Database
-- **Autenticación:** ![Firebase](https://img.shields.io/badge/firebase-%23039BE5.svg?style=for-the-badge&logo=firebase) Auth, Google Sign-In
-- **Analíticas:** ![Firebase](https://img.shields.io/badge/firebase-%23039BE5.svg?style=for-the-badge&logo=firebase) Analytics
-- **Monitoreo de Errores:** ![Firebase](https://img.shields.io/badge/firebase-%23039BE5.svg?style=for-the-badge&logo=firebase) Crashlytics
+- **Respaldo en la Nube:** Firebase Realtime Database
+- **Autenticación:** Firebase Auth, Google Sign-In
+- **Analíticas:** Firebase Analytics
+- **Monitoreo de Errores:** Firebase Crashlytics
 - **Testing:** JUnit y Mockk para pruebas unitarias
 
 ## Estructura del Proyecto
