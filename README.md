@@ -1,29 +1,34 @@
 # Ludex
 
 ## Descripción
-Ludex es una aplicación Android desarrollada utilizando Kotlin que permite a los usuarios gestionar una lista de juegos, marcándolos como favoritos, actualizando su estado y buscando títulos específicos. Este proyecto implementa Clean Architecture y utiliza MVVM para el diseño de la arquitectura de la interfaz de usuario. Además, incorpora Room para la persistencia de datos y Hilt para la inyección de dependencias.
+Ludex es una aplicación Android desarrollada utilizando Kotlin que permite a los usuarios gestionar una lista de juegos, marcándolos como favoritos, actualizando su estado y buscando títulos específicos. Este proyecto implementa Clean Architecture y utiliza MVVM para el diseño de la arquitectura de la interfaz de usuario. Además, incorpora Room para la persistencia de datos local, Firebase Realtime Database para la persistencia de datos remota, Hilt para la inyección de dependencias y Firebase Auth para gestión de usuarios.
 
 ## Características
-- **Gestión de juegos:** Crear, leer, actualizar y eliminar información sobre juegos.
+- **Gestión de juegos:** Clasificar tus juegos favoritos por estado tales como: "Pendiente", Completado", "Jugando", "Abandonado", etc.
 - **Favoritos:** Marcar juegos como favoritos para un acceso rápido.
-- **Actualización de estados:** Cambiar el estado de los juegos, como "Jugando", "Completado", etc.
 - **Búsqueda de juegos:** Filtrar juegos por título.
-- **Persistencia de datos local:** Los datos de los usuarios se almacenan localmente utilizando Room.
+- **Persistencia de datos local:** Permite al usuario consultar sus listas sin conexióon a internet.
+- **Persistencia de datos remota:** Guarda tus listas de juegos en la nube asignados a tu usuario.
 - **Diseño responsivo:** Interfaz adaptada a diferentes tamaños de pantalla y orientaciones.
 
 ## Capturas de Pantalla
 ![Google Pixel 4 XL (3) (1)](https://github.com/cvalera18/Ludex/assets/57680708/4c20495b-d76f-493e-85c4-dfecd47dbb45) ![Google Pixel 4 XL (2)](https://github.com/cvalera18/Ludex/assets/57680708/62fdfd11-9ea1-4798-9556-a4541b8cc2d5) ![Google Pixel 4 XL (4)](https://github.com/cvalera18/Ludex/assets/57680708/313f30bb-219e-4b1f-8fc0-d1413bfaca47) ![Google Pixel 4 XL (3) (2)](https://github.com/cvalera18/Ludex/assets/57680708/8cbf15d9-b090-479f-a48f-46dd94c6bc87)
 
 ## Tecnologías y Herramientas
-- **Lenguaje de Programación:** Kotlin
+- **Lenguaje de Programación:** ![Kotlin](https://img.shields.io/badge/kotlin-%237F52FF.svg?style=for-the-badge&logo=kotlin&logoColor=white)
 - **Arquitectura de la Aplicación:** Clean Architecture, MVVM
 - **Gestión de Dependencias:** Hilt
 - **Base de Datos Local:** Room
-- **Testing:** JUnit para pruebas unitarias
+- **Respaldo en la Nube:** ![Firebase](https://img.shields.io/badge/firebase-%23039BE5.svg?style=for-the-badge&logo=firebase) Realtime Database
+- **Autenticación:** ![Firebase](https://img.shields.io/badge/firebase-%23039BE5.svg?style=for-the-badge&logo=firebase) Auth, Google Sign-In
+- **Analíticas:** ![Firebase](https://img.shields.io/badge/firebase-%23039BE5.svg?style=for-the-badge&logo=firebase) Analytics
+- **Monitoreo de Errores:** ![Firebase](https://img.shields.io/badge/firebase-%23039BE5.svg?style=for-the-badge&logo=firebase) Crashlytics
+- **Testing:** JUnit y Mockk para pruebas unitarias
 
 ## Estructura del Proyecto
 El proyecto se organiza en las siguientes capas principales:
 
+- **core:** Contiene utilidades comunes, como proveedores de contexto, eventos, diálogos y extensiones.
 - **domain:** Contiene las entidades y casos de uso.
 - **data:** Define las interfaces de los repositorios y sus implementaciones, además de las fuentes de datos.
 - **presentation:** Incluye las actividades, fragmentos y ViewModels.
@@ -46,8 +51,13 @@ Para ejecutar este proyecto y asegurar su funcionamiento correcto, sigue estos p
    - Localiza el archivo de configuración en tu proyecto donde las claves API son almacenadas (`local.properties`).
    - Añade tu API Key a este archivo de configuración. Asegúrate de no subir este archivo a repositorios públicos para mantener segura tu clave.
    - Alternativamente, puedes configurar tu clave en el código en un lugar seguro y referenciarla desde allí.
+  
+5. **Configurar Firebase**
+   - Ve a la consola de Firebase y añade tu proyecto de Android.
+   - Sigue las instrucciones para registrar tu aplicación y descargar el archivo 'google-services.json'.
+   - Añade el archivo 'google-services.json' a la carpeta 'app' de tu proyecto.
 
-5. **Ejecutar el proyecto en un emulador o dispositivo Android**
+6. **Ejecutar el proyecto en un emulador o dispositivo Android**
    - Asegúrate de que tu entorno de desarrollo está configurado para ejecutar aplicaciones Android, incluyendo un emulador configurado o un dispositivo Android conectado.
    - Ejecuta la aplicación desde Android Studio usando 'Run > Run 'app''.
 
