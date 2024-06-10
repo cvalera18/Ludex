@@ -7,7 +7,7 @@ Ludex es una aplicación Android desarrollada utilizando Kotlin que permite a lo
 - 🎮 **Gestión de juegos:** Clasificar tus juegos favoritos por estado tales como: "Pendiente", Completado", "Jugando", "Abandonado", etc.
 - ⭐ **Favoritos:** Marcar juegos como favoritos para un acceso rápido.
 - 🔎 **Búsqueda de juegos:** Filtrar juegos por título.
-- 📦 **Persistencia de datos local:** Permite al usuario consultar sus listas sin conexióon a internet.
+- 📦 **Persistencia de datos local:** Permite al usuario consultar sus listas sin conexión a internet.
 - ☁️ **Persistencia de datos remota:** Guarda tus listas de juegos en la nube asignados a tu usuario.
 - 🎨 **Diseño responsivo:** Interfaz adaptada a diferentes tamaños de pantalla y orientaciones.
 
