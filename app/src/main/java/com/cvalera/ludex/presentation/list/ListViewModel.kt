@@ -38,6 +38,10 @@ class ListViewModel @Inject constructor(
 ) : ViewModel() {
     private val _isLoading = MutableLiveData<Boolean>()
     val isLoading: LiveData<Boolean> = _isLoading
+
+    private val _firstTime = MutableLiveData(true)
+    val firstTime: LiveData<Boolean> = _firstTime
+
     val allGames = getAllGamesUseCase.invoke()
         .stateIn(
             viewModelScope,
@@ -79,6 +83,7 @@ class ListViewModel @Inject constructor(
                 searchGamesUseCase(query)
             }
             _isLoading.value = false
+            _firstTime.value = false
         }
     }
 
@@ -87,6 +92,7 @@ class ListViewModel @Inject constructor(
             if (query.isNotBlank()) {
                 searchGamesUseCase(query)
             }
+            _firstTime.value = false
         }
     }
 

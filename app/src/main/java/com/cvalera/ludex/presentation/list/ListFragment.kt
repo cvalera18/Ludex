@@ -43,7 +43,9 @@ class ListFragment : Fragment() {
         configFilter()
         initRecyclerView()
         observeLoadingState()
-        getListGames()
+        if (viewModel.firstTime.value == true) {
+            getListGames()
+        }
     }
 
     private fun observeLoadingState() {

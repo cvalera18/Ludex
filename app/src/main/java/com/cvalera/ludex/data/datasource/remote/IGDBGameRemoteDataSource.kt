@@ -22,7 +22,7 @@ class IGDBGameRemoteDataSource @Inject constructor() : GameRemoteDataSource {
     companion object {
         private const val CLIENT_ID = BuildConfig.CLIENT_ID
         private const val API_KEY = BuildConfig.AUTHORIZATION_TOKEN
-        private const val PAGE_SIZE = 40
+        private const val PAGE_SIZE = 20
     }
 
     init {
